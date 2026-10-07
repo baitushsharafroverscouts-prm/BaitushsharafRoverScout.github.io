@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইউনিট রেজিস্ট্রি ও ইভেন্ট - বায়তুশ শরফ আদর্শ কামিল মাদ্রাসা রোভার স্কাউট গ্রুপ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="a.style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans Bengali", "Segoe UI", sans-serif;
+            background: #f4f6f4;
+            color: #1a2e1d;
+            line-height: 1.6;
+        }
+
+        /* Classic Top Navigation Header */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f3814;
+            color: #ffffff;
+            padding: 12px 30px;
+            border-bottom: 3px solid #2e7d32;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-title img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            object-fit: cover;
+        }
+
+        .logo-title h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: #1b5e20;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #2e7d32;
+        }
+
+        .nav-btn:hover {
+            background: #2e7d32;
+        }
+
+        .nav-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #e0f2f1;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1050px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        /* Classic Registry Cards */
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 20px;
+            border: 1px solid #dcdcdc;
+            border-top: 4px solid #1b5e20;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e8f5e9;
+            padding-bottom: 8px;
+        }
+
+        .card-header i {
+            font-size: 1.2rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            font-size: 0.92rem;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #555;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-weight: 700;
+            color: #0f3814;
+            text-align: right;
+        }
+
+        .badge-tag {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid #c8e6c9;
+        }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 30px 0 15px 0;
+            border-bottom: 2px solid #1b5e20;
+            padding-bottom: 6px;
+        }
+
+        .section-header h2 {
+            color: #0f3814;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Classic Table Design */
+        .table-responsive {
+            overflow-x: auto;
+            background: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            margin-bottom: 30px;
+        }
+
+        .registry-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .registry-table th, .registry-table td {
+            border: 1px solid #dcdcdc;
+            padding: 10px 14px;
+            font-size: 0.92rem;
+        }
+
+        .registry-table th {
+            background-color: #1b5e20;
+            color: #ffffff;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .registry-table tbody tr:nth-child(even) {
+            background-color: #f9fbf9;
+        }
+
+        .registry-table tbody tr:hover {
+            background-color: #f1f8f1;
+        }
+
+        .status-active {
+            color: #2e7d32;
+            background: #e8f5e9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid #c8e6c9;
+        }
+
+        /* Classic Footer */
+        .footer-bar {
+            background: #0f3814;
+            color: #d1e0d3;
+            padding: 30px 20px 15px;
+            border-top: 3px solid #2e7d32;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1050px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-section h4 {
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            border-bottom: 1px solid #2e7d32;
+            padding-bottom: 4px;
+            display: inline-block;
+        }
+
+        .footer-section p {
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-section a {
+            color: #a3c2a8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .social-icons a {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 15px;
+            font-size: 0.85rem;
+            color: #99b89e;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .logo-title h1 {
+                font-size: 1rem;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="navbar">
+        <div class="logo-title">
+            <img src="logo.jpg.jpg" alt="Logo" onerror="this.src='https://via.placeholder.com/40?text=BSG'">
+            <h1>বায়তুশ শরফ আদর্শ কামিল মাদ্রাসা রোভার স্কাউট গ্রুপ</h1>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> হোম পেজ</a>
+            <div class="nav-badge">
+                <i class="fas fa-campground"></i> রেজিস্টার্ড গ্রুপ
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+
+        <!-- Registry Cards -->
+        <div class="registry-grid">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-flag"></i>
+                    <h2>বাংলাদেশ স্কাউটস রেজিস্ট্রি</h2>
+                </div>
+                <ul class="info-list">
+                    <li>
+                        <span class="info-label">জাতীয় রেজিস্ট্রেশন নং:</span>
+                        <span class="info-value badge-tag">২৬৫২</span>
+                    </li>
+                    <li>
+                        <span class="info-label">সংগঠন:</span>
+                        <span class="info-value">বাংলাদেশ স্কাউটস</span>
+                    </li>
+                    <li>
+                        <span class="info-label">গ্রুপের নাম:</span>
+                        <span class="info-value">বায়তুশ শরফ আদর্শ কামিল মাদ্রাসা রোভার স্কাউট গ্রুপ</span>
+                    </li>
+                    <li>
+                        <span class="info-label">স্ট্যাটাস:</span>
+                        <span class="status-active"><i class="fas fa-check-circle"></i> সক্রিয় (Active)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h2>জেলা স্কাউটস রেজিস্ট্রি</h2>
+                </div>
+                <ul class="info-list">
+                    <li>
+                        <span class="info-label">জেলা রেজিস্ট্রেশন নং:</span>
+                        <span class="info-value badge-tag">১০৯</span>
+                    </li>
+                    <li>
+                        <span class="info-label">জেলা রোভার:</span>
+                        <span class="info-value">চট্টগ্রাম জেলা রোভার</span>
+                    </li>
+                    <li>
+                        <span class="info-label">অঞ্চল:</span>
+                        <span class="info-value">রোভার অঞ্চল</span>
+                    </li>
+                    <li>
+                        <span class="info-label">অবস্থান:</span>
+                        <span class="info-value">চট্টগ্রাম, বাংলাদেশ</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Group Events Table -->
+        <div class="section-header">
+            <h2><i class="fas fa-calendar-alt"></i> কার্যক্রম ও অর্জনের সময়সূচি</h2>
+        </div>
+
+        <div class="table-responsive">
+            <table class="registry-table">
+                <thead>
+                    <tr>
+                        <th>নং</th>
+                        <th>ইভেন্ট ও কার্যক্রমের বিবরণ</th>
+                        <th>তারিখ / সময়সূচি</th>
+                        <th>স্থান / আয়োজক</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>১</td>
+                        <td>বার্ষিক তাঁবুবাস ও দীক্ষা ক্যাম্প ২০২৪</td>
+                        <td>২০২৪</td>
+                        <td>গ্রুপ প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>২</td>
+                        <td>চট্টগ্রাম বিভাগীয় কোর্স ফর রোভার মেট -২০২৪</td>
+                        <td>২০২৪</td>
+                        <td>চট্টগ্রাম বিভাগ</td>
+                    </tr>
+                    <tr>
+                        <td>৩</td>
+                        <td>'তথ্য মেলা ২০২৫' ১ম স্থান: মুহাম্মদ আবু বকর (আলিম)</td>
+                        <td>১৫ ও ১৬ জানুয়ারি ২০২৫</td>
+                        <td>সনাক-টিআইবি, জেলা শিল্পকলা একাডেমি, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৪</td>
+                        <td>৭ম জাতীয় কমডেকা-তে তাঁবুকলা প্রতিযোগিতায় প্রথম স্থান অর্জন</td>
+                        <td>২০২৫</td>
+                        <td>৭ম জাতীয় কমডেকা</td>
+                    </tr>
+                    <tr>
+                        <td>৫</td>
+                        <td>১ম স্পিরিচুয়াল ডেভেলপমেন্ট শীর্ষক ওয়ার্কশপ ২০২৫</td>
+                        <td>২০ মার্চ ২০২৫</td>
+                        <td>গ্রুপ প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>৬</td>
+                        <td>হজ্ব ক্যাম্প ২০২৫</td>
+                        <td>২০২৫</td>
+                        <td>হজ্ব ক্যাম্প</td>
+                    </tr>
+                    <tr>
+                        <td>৭</td>
+                        <td>সিনিয়র রোভার মেট ওয়ার্কশপ</td>
+                        <td>৩০-৩১ মে, ২০২৫</td>
+                        <td>প্রাইমারি টিচার্স ট্রেনিং ইন্সটিটিউট, কক্সবাজার</td>
+                    </tr>
+                    <tr>
+                        <td>৮</td>
+                        <td>বিশ্ব পরিবেশ দিবস ২০২৫</td>
+                        <td>২৫ জুন ২০২৫ (বুধবার)</td>
+                        <td>জেলা শিল্পকলা একাডেমি, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৯</td>
+                        <td>লগবই প্রস্তুতকরণ ও পিআরএস অ্যাওয়ার্ড অর্জনের কৌশল নির্ধারণ ওয়ার্কশপ</td>
+                        <td>২০২৫</td>
+                        <td>বাংলাদেশ স্কাউটস, চট্টগ্রাম জেলা রোভার</td>
+                    </tr>
+                    <tr>
+                        <td>১০</td>
+                        <td>জুলাইয়ের গান, চলচ্চিত্র প্রদর্শনী ও বিশেষ ড্রোন শো (দ্বিতীয় পর্ব)</td>
+                        <td>১৬ জুলাই ২০২৫</td>
+                        <td>চট্টগ্রাম জেলা স্টেডিয়াম</td>
+                    </tr>
+                    <tr>
+                        <td>১১</td>
+                        <td>জুলাই স্মরণে প্রতীকী ম্যারাথন ও নির্ধারিত বক্তৃতা প্রতিযোগিতায় ১ম: সাইফুল ইসলাম</td>
+                        <td>২৬ জুলাই ২০২৫</td>
+                        <td>জেলা প্রশাসন ও চট্টগ্রাম জেলা রোভার</td>
+                    </tr>
+                    <tr>
+                        <td>১২</td>
+                        <td>চট্টগ্রাম বিভাগ ২৪ এর রঙে গ্রাফিতি ও চিত্রাংকন প্রতিযোগিতা ২০২৫</td>
+                        <td>২০২৫</td>
+                        <td>চট্টগ্রাম বিভাগ</td>
+                    </tr>
+                    <tr>
+                        <td>১৩</td>
+                        <td>আইসিটি দক্ষতা অর্জন কোর্স</td>
+                        <td>২৯ আগস্ট, ২০২৫</td>
+                        <td>সরকারি সিটি কলেজ, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>১৪</td>
+                        <td>৩২তম ও ৩৩তম কোর্স ফর রোভার মেট ২০২৫</td>
+                        <td>১-৪ মে ২০২৫</td>
+                        <td>চট্টগ্রাম জেলা রোভার</td>
+                    </tr>
+                    <tr>
+                        <td>১৫</td>
+                        <td>৪১তম পবিত্র মিলাদুন্নবী উদযাপন উপলক্ষে তামাদ্দুনিক প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠান</td>
+                        <td>২০২৫</td>
+                        <td>বায়তুশ শরফ</td>
+                    </tr>
+                    <tr>
+                        <td>১৬</td>
+                        <td>চট্টগ্রাম বিভাগীয় সিনিয়র রোভার মেট ও সমাজ উন্নয়ন অ্যাওয়ার্ড ওয়ার্কশপ</td>
+                        <td>২৭/০৯/২০২৫</td>
+                        <td>রাঙ্গামাটি পার্বত্য জেলা রোভার</td>
+                    </tr>
+                    <tr>
+                        <td>১৭</td>
+                        <td>68th JOTA-JOTI 29th</td>
+                        <td>১৭-১৯ অক্টোবর ২০২৫</td>
+                        <td>অনলাইন/রেডিও</td>
+                    </tr>
+                    <tr>
+                        <td>১৮</td>
+                        <td>চট্টগ্রাম বিভাগীয় কোর্স ফর রোভার মেট -২০২৫</td>
+                        <td>২৪-২৭ অক্টোবর ২০২৫</td>
+                        <td>চট্টগ্রাম বিভাগ</td>
+                    </tr>
+                    <tr>
+                        <td>১৯</td>
+                        <td>৫২৭ তম স্কাউট ইউনিট লিডার বেসিক কোর্স</td>
+                        <td>০৭-১১ অক্টোবর ২০২৫</td>
+                        <td>জাতীয় স্কাউট প্রশিক্ষণ কেন্দ্র, মৌচাক, গাজীপুর</td>
+                    </tr>
+                    <tr>
+                        <td>২০</td>
+                        <td>টাইফয়েড টিকা ক্যাম্পেইন ২০২৫</td>
+                        <td>৮ই নভেম্বর ২০২৫</td>
+                        <td>মাদ্রাসা প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>২১</td>
+                        <td>১৯ তম চট্টগ্রাম জেলা রোভার মুট ২০২৫</td>
+                        <td>২০-২৪ ডিসেম্বর ২০২৫</td>
+                        <td>চট্টগ্রাম বিশ্ববিদ্যালয়</td>
+                    </tr>
+                    <tr>
+                        <td>২২</td>
+                        <td>জাতীয় শিক্ষা সপ্তাহ-২০২৬: বিভাগীয় পর্যায়ে শ্রেষ্ঠ রোভার গ্রুপ নির্বাচন</td>
+                        <td>২০২৬</td>
+                        <td>চট্টগ্রাম বিভাগ (১১টি জেলা)</td>
+                    </tr>
+                    <tr>
+                        <td>২৩</td>
+                        <td>প্রতিভা অন্বেষণ ২০২৬</td>
+                        <td>১৭ই জানুয়ারি ২০২৬</td>
+                        <td>গ্রুপ প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>২৪</td>
+                        <td>ওরিয়েন্টেশন প্রোগ্রাম-২০২৬</td>
+                        <td>১/২/২০২৬</td>
+                        <td>গ্রুপ প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>২৫</td>
+                        <td>বিভাগীয় প্রতিভা অন্বেষণ প্রতিযোগিতা ও ৭টি ক্রু-মিটিং</td>
+                        <td>৭/২/২০২৬ (মিটিং: ৫-২৫ ফেব)</td>
+                        <td>বিভাগীয় রোভার</td>
+                    </tr>
+                    <tr>
+                        <td>২৬</td>
+                        <td>২য় স্পিরিচুয়াল ডেভেলপমেন্ট ওয়ার্কশপ ও পথচারীদের মাঝে ইফতার বিতরণ</td>
+                        <td>২ ও ৬ মার্চ ২০২৬</td>
+                        <td>দেওয়ানহাট মোড় (বায়তুশ শরফ আনজুমনে নওজোয়ান)</td>
+                    </tr>
+                    <tr>
+                        <td>২৭</td>
+                        <td>নিয়মিত প্যাক, ট্রুপ ও ক্রু মিটিং পরিচালনাকারী ইউনিট লিডার পুরস্কার (মোহাম্মদ সাইফুদ্দিন)</td>
+                        <td>০৮ মার্চ ২০২৬</td>
+                        <td>বাংলাদেশ স্কাউটস</td>
+                    </tr>
+                    <tr>
+                        <td>২৮</td>
+                        <td>মহান স্বাধীনতা ও জাতীয় দিবস ২০২৬</td>
+                        <td>২৬/৩/২০২৬</td>
+                        <td>মাদ্রাসা ও জেলা প্রশাসন</td>
+                    </tr>
+                    <tr>
+                        <td>২৯</td>
+                        <td>১৯তম রোভার অ্যাডভেঞ্চার ক্যাম্প ২০২৬</td>
+                        <td>২০২৬</td>
+                        <td>অ্যাডভেঞ্চার ক্যাম্প সাইট</td>
+                    </tr>
+                    <tr>
+                        <td>৩০</td>
+                        <td>বাংলা নববর্ষ ১৪৩৩-২০২৬ উদযাপন</td>
+                        <td>১৪/৪/২০২৬</td>
+                        <td>গ্রুপ প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>৩১</td>
+                        <td>বিভাগীয় পর্যায়ের কেরাতে ১ম স্থান অর্জনকারী: রোভার তাহমিদুল হাসান</td>
+                        <td>২০২৬</td>
+                        <td>চট্টগ্রাম বিভাগ</td>
+                    </tr>
+                    <tr>
+                        <td>৩২</td>
+                        <td>আঞ্চলিক ইয়ুথ ফোরাম ২০২৬</td>
+                        <td>১৫-১৬ মে, ২০২৬</td>
+                        <td>বাহাদুরপুর রোভার স্কাউট প্রশিক্ষণ কেন্দ্র, গাজীপুর</td>
+                    </tr>
+                    <tr>
+                        <td>৩৩</td>
+                        <td>সুবর্ণজয়ন্তী রোভার মুট ডিসপ্লে পারফর্মার ও জেলা রোভার মুট স্বেচ্ছাসেবক সংবর্ধনা</td>
+                        <td>২২শে মে ২০২৬</td>
+                        <td>চট্টগ্রাম জেলা রোভার</td>
+                    </tr>
+                    <tr>
+                        <td>৩৪</td>
+                        <td>জাতীয় বিজ্ঞান মেলায় অংশগ্রহণ -২০২৬</td>
+                        <td>৭-৮ জুন ২০২৬</td>
+                        <td>বিজ্ঞান ও প্রযুক্তি মন্ত্রণালয়</td>
+                    </tr>
+                    <tr>
+                        <td>৩৫</td>
+                        <td>সেইফ ফ্রম হার্ম (Safe from Harm) সার্টিফিকেশন কোর্স</td>
+                        <td>১৯ জুন, ২০২৬</td>
+                        <td>সরকারি হাজী মুহাম্মদ মহসিন কলেজ, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৩৬</td>
+                        <td>বায়তুশ শরফ আদর্শ কামিল মাদরাসা রোভার স্কাউট গ্রুপের ৫ম দীক্ষা অনুষ্ঠান</td>
+                        <td>২০/৬/২০২৬</td>
+                        <td>মাদ্রাসা প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>৩৭</td>
+                        <td>আরবি বিশ্ববিদ্যালয়ের প্রো-ভিসির আগমন উপলক্ষে গার্ড অফ অনার প্রদান</td>
+                        <td>১২ জুলাই ২০২৬</td>
+                        <td>মাদ্রাসা প্রাঙ্গণ</td>
+                    </tr>
+                    <tr>
+                        <td>৩৮</td>
+                        <td>চট্টগ্রামের বাঁশখালীতে ত্রাণ সামগ্রী বিতরণ ২০২৬</td>
+                        <td>১৩ই জুলাই ২০২৬</td>
+                        <td>বাঁশখালী, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৩৯</td>
+                        <td>জুলাই শহীদ দিবস উদযাপন ২০২৬</td>
+                        <td>১৬ জুলাই ২০২৬</td>
+                        <td>চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৪০</td>
+                        <td>জেলা প্রশাসক কর্তৃক আয়োজিত পরিচ্ছন্নতা অভিযান</td>
+                        <td>২৬শে জুলাই ২০২৬</td>
+                        <td>জেলা প্রশাসন, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৪১</td>
+                        <td>মাধ্যমিক ও উচ্চ মাধ্যমিক শিক্ষা বোর্ড চট্টগ্রাম অঞ্চলের পরিচালকের বিদায় সংবর্ধনা</td>
+                        <td>২০২৬</td>
+                        <td>শিক্ষা বোর্ড, চট্টগ্রাম</td>
+                    </tr>
+                    <tr>
+                        <td>৪২</td>
+                        <td>ঈদে মিলাদুন্নাবী (সা.) উপলক্ষে তামাদ্দুনিক প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠানে অংশগ্রহণ</td>
+                        <td>২০২৬</td>
+                        <td>বায়তুশ শরফ আনজুমনে ইত্তেহাদ বাংলাদেশ ট্রাস্ট</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h4>
+                <p>বায়তুশ শরফ কমপ্লেক্স, ডিটি রোড, <br>ধনিয়ালাপাড়া, ডাবলমুরিং, চট্টগ্রাম, 4100।</p>
+                <p>ইমেইল: baitushsharafroverscouts@gmail.com</p>
+                <p>ফোন: 01836446216</p>
+            </div>
+            <div class="footer-section">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul>
+                    <li><a href="https://www.bsakm.edu.bd/" target="_blank">বায়তুশ শরফ আদর্শ কামিল মাদ্রাসা</a></li>
+                    <li><a href="https://baitushsharaf.org/" target="_blank">বায়তুশ শরফ</a></li>
+                   
+                  
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>সোশ্যাল মিডিয়া & প্রকাশনা</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=61587542846477" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; ২০২৬ বায়তুশ শরফ রোভার স্কাউট গ্রুপ। সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+</body>
+</html>

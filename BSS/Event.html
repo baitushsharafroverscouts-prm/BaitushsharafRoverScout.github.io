@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বার্ষিক স্কাউট ক্যাম্পিং ২০২৬ - বায়তুশ শরফ রোভার স্কাউট গ্রুপ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Playfair+Display:ital,wght@1,600&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="a.style.css">
+
+    <style>
+        :root{
+            --ec-accent:#1b5e20;
+            --ec-accent-deep:#0f3814;
+            --ec-gold:#c9a227;
+            --ec-gold-soft:#e6c85a;
+            --ec-paper:#fbf8ef;
+            --ec-ink:#1c2433;
+        }
+
+        .ev-reveal{
+            opacity:0;
+            transform:translateY(20px);
+            transition:opacity .6s ease, transform .6s ease;
+        }
+        .ev-reveal.is-visible{
+            opacity:1;
+            transform:translateY(0);
+        }
+        @media (prefers-reduced-motion:reduce){
+            .ev-reveal{opacity:1;transform:none;transition:none;}
+        }
+
+        /* Quick-fact tag row under the hero */
+        .ev-tags{
+            display:flex;
+            justify-content:center;
+            gap:10px;
+            flex-wrap:wrap;
+            margin:18px 0 0;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+        }
+        .ev-tags span{
+            background:#fff;
+            border:1px solid #d8c98a;
+            color:var(--ec-accent-deep);
+            padding:6px 16px;
+            border-radius:999px;
+            font-size:0.85rem;
+            font-weight:600;
+            display:flex;
+            align-items:center;
+            gap:6px;
+        }
+        .ev-tags span i{color:var(--ec-gold);}
+
+        /* Section divider style matching the serif/gold theme */
+        .ev-section-title{
+            text-align:center;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-weight:800;
+            font-size:1.4rem;
+            letter-spacing:1px;
+            color:var(--ec-accent-deep);
+            margin:34px 0 20px;
+            text-shadow:1px 1px 0 rgba(201,162,39,.15);
+        }
+        .ev-section-title:first-of-type{ margin-top:6px; }
+
+        .ev-intro{
+            text-align:center;
+            max-width:680px;
+            margin:0 auto 8px;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            color:#3a4150;
+            font-size:0.98rem;
+            line-height:1.9;
+        }
+        .ev-intro p{ margin:0 0 14px; }
+        .ev-intro p:last-child{ margin-bottom:0; }
+
+        /* Fact cards */
+        .ev-facts{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+            gap:16px;
+            max-width:760px;
+            margin:0 auto;
+        }
+        .ev-fact-card{
+            background:#fff;
+            border:1px solid #e3d9b0;
+            border-radius:14px;
+            padding:18px 16px;
+            text-align:center;
+            box-shadow:0 6px 16px rgba(15,56,20,.06);
+        }
+        .ev-fact-card i{
+            width:42px;height:42px;border-radius:50%;
+            background:linear-gradient(160deg,var(--ec-accent),var(--ec-accent-deep));
+            color:#fff;
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 10px;
+            font-size:15px;
+            border:2px solid var(--ec-gold-soft);
+        }
+        .ev-fact-label{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.72rem;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            color:#8a8f99;
+            margin-bottom:4px;
+        }
+        .ev-fact-value{
+            font-family:'Noto Serif Bengali','Playfair Display',serif;
+            font-weight:700;
+            font-size:1rem;
+            color:var(--ec-ink);
+        }
+
+        /* Schedule timeline */
+        .ev-timeline{
+            max-width:680px;
+            margin:0 auto;
+            border-left:2px dashed var(--ec-gold);
+            padding-left:22px;
+        }
+        .ev-timeline-item{
+            position:relative;
+            margin-bottom:24px;
+        }
+        .ev-timeline-item:last-child{ margin-bottom:0; }
+        .ev-timeline-item::before{
+            content:"";
+            position:absolute;
+            left:-28px;
+            top:4px;
+            width:12px;height:12px;
+            border-radius:50%;
+            background:var(--ec-accent);
+            border:2px solid var(--ec-gold-soft);
+        }
+        .ev-day{
+            font-family:'Playfair Display','Noto Serif Bengali',serif;
+            font-style:italic;
+            color:var(--ec-gold);
+            font-size:1.05rem;
+            margin:0 0 4px;
+        }
+        .ev-day-title{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-weight:700;
+            color:var(--ec-accent-deep);
+            font-size:0.98rem;
+            margin:0 0 4px;
+        }
+        .ev-day-desc{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            color:#4a5160;
+            font-size:0.9rem;
+            line-height:1.7;
+            margin:0;
+        }
+
+        /* Registration + contact block */
+        .ev-panels{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+            max-width:780px;
+            margin:0 auto;
+        }
+        @media (max-width:620px){ .ev-panels{ grid-template-columns:1fr; } }
+
+        .ev-panel-card{
+            border-radius:16px;
+            padding:24px 22px;
+            text-align:center;
+        }
+        .ev-panel-card.gold{
+            background:linear-gradient(160deg,var(--ec-accent),var(--ec-accent-deep));
+            color:#fff;
+            box-shadow:0 10px 24px rgba(15,56,20,.22);
+        }
+        .ev-panel-card.paper{
+            background:#fff;
+            border:1px solid #e3d9b0;
+        }
+        .ev-panel-card h4{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.78rem;
+            letter-spacing:1.5px;
+            text-transform:uppercase;
+            margin:0 0 12px;
+        }
+        .ev-panel-card.gold h4{ color:var(--ec-gold-soft); }
+        .ev-panel-card.paper h4{ color:var(--ec-accent-deep); }
+        .ev-panel-card p{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.85rem;
+            line-height:1.7;
+            margin:0 0 16px;
+        }
+        .ev-panel-card.gold p{ color:rgba(255,255,255,.85); }
+        .ev-panel-card.paper p{ color:#4a5160; }
+        .ev-btn{
+            display:inline-block;
+            background:var(--ec-gold);
+            color:var(--ec-accent-deep);
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-weight:700;
+            text-decoration:none;
+            padding:10px 26px;
+            border-radius:999px;
+            font-size:0.88rem;
+        }
+        .ev-btn:hover{ background:var(--ec-gold-soft); }
+        .ev-note{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.72rem;
+            color:rgba(255,255,255,.65);
+            margin-top:10px;
+        }
+        .ev-contact-list{
+            list-style:none;
+            padding:0;margin:0;
+            text-align:left;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.88rem;
+        }
+        .ev-contact-list li{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            padding:6px 0;
+            color:#3a4150;
+        }
+        .ev-contact-list li i{ color:var(--ec-accent); width:16px; text-align:center; }
+        .ev-contact-list li b{ color:var(--ec-ink); }
+
+        /* "No event" state (shown when the popup/event is switched off in Admin Panel) */
+        .ev-off-wrap{
+            max-width:520px;
+            margin:60px auto;
+            text-align:center;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            padding:0 20px;
+        }
+        .ev-off-wrap i{
+            width:64px;height:64px;border-radius:50%;
+            background:linear-gradient(160deg,var(--ec-accent),var(--ec-accent-deep));
+            color:#e6c85a;
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 18px;
+            font-size:26px;
+            border:3px solid var(--ec-gold);
+        }
+        .ev-off-wrap h2{ color:var(--ec-accent-deep); font-family:'Noto Serif Bengali',serif; margin:0 0 10px; }
+        .ev-off-wrap p{ color:#4a5160; line-height:1.8; margin:0 0 22px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-title">
+            <img src="logo.jpg.jpg" alt="Logo" class="logo">
+            <h1 data-bn="বায়তুশ শরফ রোভার স্কাউট গ্রুপ" data-en="Baitush Sharaf Rover Scout Group">বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h1>
+        </div>
+        <header class="hero-header">
+            <div class="settings-container">
+                <button class="three-dots-btn" id="menuToggle"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-settings" id="settingsDropdown">
+                    <div class="setting-item">
+                        <span data-bn="ডার্ক মোড" data-en="Dark Mode">ডার্ক মোড</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span data-bn="ভাষা" data-en="Language">ভাষা</span>
+                        <button id="langToggleBtn" class="lang-btn">English</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <ul class="nav-links">
+            <li><a href="index.html" data-bn="হোম" data-en="Home">হোম</a></li>
+            <li class="dropdown">
+                <a href="#" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="a.html" data-bn="সাধারণ তথ্য" data-en="General Information">সাধারণ তথ্য</a></li>
+                    <li><a href="history.html" data-bn="ইতিহাস ও পটভূমি" data-en="History & Background">ইতিহাস ও পটভূমি</a></li>
+                    <li><a href="Or.html" data-bn="সাংগঠনিক তথ্য" data-en="Organizational Info">সাংগঠনিক তথ্য</a></li>
+                    <li><a href="crew-council.html" data-bn="নির্বাহী কমিটি" data-en="Executive Committee">নির্বাহী কমিটি</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-bn="সংবাদ ও মিডিয়া" data-en="News & Media">সংবাদ ও মিডিয়া <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="event.html" data-bn="নোটিশ ও ইভেন্ট" data-en="Notices & Events">নোটিশ ও ইভেন্ট</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" data-bn="প্রকল্প" data-en="Projects">প্রকল্প <i class="fas fa-caret-down"></i></a></li>
+            <li class="dropdown">
+                <a href="#" data-bn="আবেদন" data-en="Apply">আবেদন <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="scout-admission-form.html" data-bn="বাইতুশ শরফ রোভার স্কাউট গ্রুপ আবেদন" data-en="Apply BSRSG">গ্রুপ আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/registration" target="_blank" data-bn="বিএসআইডি আবেদন" data-en="Apply BSID">বিএসআইডি আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/user-verify" target="_blank" data-bn="স্কাউট আইডি যাচাই" data-en="Verification of Scout ID">স্কাউট আইডি যাচাই</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 id="evHeroTitle" data-bn="বার্ষিক স্কাউট ক্যাম্পিং ২০২৬" data-en="Annual Scout Camping 2026">বার্ষিক স্কাউট ক্যাম্পিং ২০২৬</h1>
+            <p data-bn="তিন দিনের নেতৃত্ব, দলগত কার্যক্রম ও সংস্কৃতির এক অনন্য আয়োজন" data-en="Three days of leadership, teamwork and culture">তিন দিনের নেতৃত্ব, দলগত কার্যক্রম ও সংস্কৃতির এক অনন্য আয়োজন</p>
+            <h3 data-bn="বায়তুশ শরফ রোভার স্কাউট গ্রুপ" data-en="Baitush Sharaf Rover Scout Group">বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h3>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+
+        <!-- Shown only when content.eventPopup.enabled === false -->
+        <div class="ev-off-wrap" id="evOffWrap" style="display:none;">
+            <i class="fas fa-calendar-times"></i>
+            <h2>এই মুহূর্তে কোনো নির্ধারিত ইভেন্ট নেই</h2>
+            <p>আয়োজকরা এখনো নতুন কোনো ইভেন্ট প্রকাশ করেননি। নতুন ঘোষণার জন্য হোমপেজের নোটিশ বোর্ড লক্ষ্য রাখুন।</p>
+            <a href="index.html" class="ev-btn">হোমপেজে ফিরে যান</a>
+        </div>
+
+        <article class="content-card" id="evContentCard">
+
+            <div class="ev-tags ev-reveal">
+                <span><i class="fas fa-calendar-alt"></i> <span id="evTagDate" data-bn="১৫–১৭ অক্টোবর, ২০২৬" data-en="Oct 15–17, 2026">১৫–১৭ অক্টোবর, ২০২৬</span></span>
+                <span><i class="fas fa-map-marker-alt"></i> <span id="evTagLocation" data-bn="কক্সবাজার সমুদ্র সৈকত" data-en="Cox's Bazar Sea Beach">কক্সবাজার সমুদ্র সৈকত</span></span>
+                <span><i class="fas fa-clock"></i> <span id="evTagDeadline" data-bn="নিবন্ধন শেষ: ১০ অক্টোবর" data-en="Registration closes: Oct 10">নিবন্ধন শেষ: ১০ অক্টোবর</span></span>
+            </div>
+
+            <h2 class="ev-section-title" data-bn="বিবরণ" data-en="About the Event">বিবরণ</h2>
+            <div class="ev-intro ev-reveal">
+                <p id="evIntro1" data-bn="বাইতুশ শরফ রোভার স্কাউট গ্রুপের বার্ষিক ক্যাম্পিং এই বছর অনুষ্ঠিত হচ্ছে কক্সবাজার সমুদ্র সৈকতে। তিন দিনব্যাপী এই আয়োজনে থাকবে দলগত কার্যক্রম, নেতৃত্ব প্রশিক্ষণ, পরিবেশ সচেতনতামূলক সেশন এবং সাংস্কৃতিক অনুষ্ঠান।"
+                   data-en="This year's annual camping of Baitush Sharaf Rover Scout Group will be held at Cox's Bazar Sea Beach. The three-day event will feature team activities, leadership training, environmental awareness sessions and cultural programs.">
+                    বাইতুশ শরফ রোভার স্কাউট গ্রুপের বার্ষিক ক্যাম্পিং এই বছর অনুষ্ঠিত হচ্ছে কক্সবাজার সমুদ্র সৈকতে। তিন দিনব্যাপী এই আয়োজনে থাকবে দলগত কার্যক্রম, নেতৃত্ব প্রশিক্ষণ, পরিবেশ সচেতনতামূলক সেশন এবং সাংস্কৃতিক অনুষ্ঠান।
+                </p>
+                <p id="evIntro2" data-bn="এসআরএম, এএসআরএম, আরএম এবং সাধারণ সকল রোভার সদস্যকে অংশগ্রহণের জন্য অনুরোধ করা হচ্ছে। প্রয়োজনীয় সরঞ্জাম ও নির্দেশনা নিবন্ধনের পর মেইল/হোয়াটসঅ্যাপ গ্রুপে জানিয়ে দেওয়া হবে।"
+                   data-en="All SRM, ASRM, RM and general rover members are requested to take part. Required gear and instructions will be shared via email/WhatsApp group after registration.">
+                    এসআরএম, এএসআরএম, আরএম এবং সাধারণ সকল রোভার সদস্যকে অংশগ্রহণের জন্য অনুরোধ করা হচ্ছে। প্রয়োজনীয় সরঞ্জাম ও নির্দেশনা নিবন্ধনের পর মেইল/হোয়াটসঅ্যাপ গ্রুপে জানিয়ে দেওয়া হবে।
+                </p>
+            </div>
+
+            <h2 class="ev-section-title" data-bn="ইভেন্টের তথ্য" data-en="Event Info">ইভেন্টের তথ্য</h2>
+            <div class="ev-facts ev-reveal">
+                <div class="ev-fact-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="ev-fact-label" data-bn="তারিখ" data-en="Date">তারিখ</div>
+                    <div class="ev-fact-value" id="evFactDate" data-bn="১৫–১৭ অক্টোবর, ২০২৬" data-en="Oct 15–17, 2026">১৫–১৭ অক্টোবর, ২০২৬</div>
+                </div>
+                <div class="ev-fact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="ev-fact-label" data-bn="স্থান" data-en="Location">স্থান</div>
+                    <div class="ev-fact-value" id="evFactLocation" data-bn="কক্সবাজার সমুদ্র সৈকত" data-en="Cox's Bazar Sea Beach">কক্সবাজার সমুদ্র সৈকত</div>
+                </div>
+                <div class="ev-fact-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="ev-fact-label" data-bn="নিবন্ধনের শেষ তারিখ" data-en="Registration Deadline">নিবন্ধনের শেষ তারিখ</div>
+                    <div class="ev-fact-value" id="evFactDeadline" data-bn="১০ অক্টোবর, ২০২৬" data-en="Oct 10, 2026">১০ অক্টোবর, ২০২৬</div>
+                </div>
+                <div class="ev-fact-card">
+                    <i class="fas fa-users"></i>
+                    <div class="ev-fact-label" data-bn="অংশগ্রহণকারী" data-en="Participants">অংশগ্রহণকারী</div>
+                    <div class="ev-fact-value" data-bn="সকল রোভার সদস্য" data-en="All Rover Members">সকল রোভার সদস্য</div>
+                </div>
+            </div>
+
+            <h2 class="ev-section-title" data-bn="সময়সূচি" data-en="Schedule">সময়সূচি</h2>
+            <div class="ev-timeline ev-reveal" id="evTimeline">
+                <div class="ev-timeline-item">
+                    <p class="ev-day" data-bn="দিন ১" data-en="Day 1">দিন ১</p>
+                    <p class="ev-day-title" data-bn="যাত্রা ও ক্যাম্প স্থাপন" data-en="Departure & Camp Setup">যাত্রা ও ক্যাম্প স্থাপন</p>
+                    <p class="ev-day-desc" data-bn="সকাল ৭টায় রওনা, বিকেলে ক্যাম্প স্থাপন ও পরিচিতি পর্ব।" data-en="Departure at 7 AM, camp setup and introductions in the afternoon.">সকাল ৭টায় রওনা, বিকেলে ক্যাম্প স্থাপন ও পরিচিতি পর্ব।</p>
+                </div>
+                <div class="ev-timeline-item">
+                    <p class="ev-day" data-bn="দিন ২" data-en="Day 2">দিন ২</p>
+                    <p class="ev-day-title" data-bn="প্রশিক্ষণ ও কার্যক্রম" data-en="Training & Activities">প্রশিক্ষণ ও কার্যক্রম</p>
+                    <p class="ev-day-desc" data-bn="নেতৃত্ব বিষয়ক সেশন, দলগত গেমস, সন্ধ্যায় ক্যাম্পফায়ার।" data-en="Leadership sessions, team games, campfire in the evening.">নেতৃত্ব বিষয়ক সেশন, দলগত গেমস, সন্ধ্যায় ক্যাম্পফায়ার।</p>
+                </div>
+                <div class="ev-timeline-item">
+                    <p class="ev-day" data-bn="দিন ৩" data-en="Day 3">দিন ৩</p>
+                    <p class="ev-day-title" data-bn="সমাপনী ও প্রত্যাবর্তন" data-en="Closing & Return">সমাপনী ও প্রত্যাবর্তন</p>
+                    <p class="ev-day-desc" data-bn="পরিবেশ পরিষ্কার কার্যক্রম, সার্টিফিকেট বিতরণ, দুপুরে ফেরার যাত্রা।" data-en="Cleanup activity, certificate distribution, return journey at noon.">পরিবেশ পরিষ্কার কার্যক্রম, সার্টিফিকেট বিতরণ, দুপুরে ফেরার যাত্রা।</p>
+                </div>
+            </div>
+
+            <h2 class="ev-section-title" data-bn="নিবন্ধন ও যোগাযোগ" data-en="Registration & Contact">নিবন্ধন ও যোগাযোগ</h2>
+            <div class="ev-panels ev-reveal">
+                <div class="ev-panel-card gold">
+                    <h4 data-bn="নিবন্ধন করুন" data-en="Register Now">নিবন্ধন করুন</h4>
+                    <p data-bn="সীমিত সংখ্যক আসন — আজই নিবন্ধন সম্পন্ন করুন।" data-en="Limited seats available — complete your registration today.">সীমিত সংখ্যক আসন — আজই নিবন্ধন সম্পন্ন করুন।</p>
+                    <a href="#" class="ev-btn" id="evRegisterLink" data-bn="নিবন্ধন ফর্ম" data-en="Registration Form">নিবন্ধন ফর্ম</a>
+                    <div class="ev-note" data-bn="নিবন্ধন লিংক শীঘ্রই যোগ করা হবে" data-en="Registration link will be added soon">নিবন্ধন লিংক শীঘ্রই যোগ করা হবে</div>
+                </div>
+                <div class="ev-panel-card paper">
+                    <h4 data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</h4>
+                    <ul class="ev-contact-list">
+                        <li><i class="fas fa-user"></i> <span><b data-bn="গ্রুপ লিডার:" data-en="Group Leader:">গ্রুপ লিডার:</b> <span id="evContactLeader">[নাম বসান]</span></span></li>
+                        <li><i class="fas fa-phone"></i> <span><b data-bn="ফোন:" data-en="Phone:">ফোন:</b> <span id="evContactPhone">[নম্বর বসান]</span></span></li>
+                        <li><i class="fas fa-envelope"></i> <span><b data-bn="ইমেইল:" data-en="Email:">ইমেইল:</b> <span id="evContactEmail">[ইমেইল বসান]</span></span></li>
+                    </ul>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h4>
+                <p>বায়তুশ শরফ কমপ্লেক্স, ডিটি রোড, <br>ধনিয়ালাপাড়া, ডাবলমুরিং, চট্টগ্রাম, 4100।</p>
+                <p>ইমেইল: baitushsharafroverscouts@gmail.com</p>
+                <p>মোবাইল: 01836446216</p>
+            </div>
+            <div class="footer-section">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul>
+                    <li><a href="https://www.bsakm.edu.bd/" target="_blank">Baitush Sharaf Adarsha Kamil Madrasah</a></li>
+                    <li><a href="https://baitushsharaf.org/" target="_blank">Baitush Sharaf</a></li>
+                    <li><a href="https://www.scouts.gov.bd/" target="_blank">বাংলাদেশ স্কাউটস</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>সোশ্যাল মিডিয়া</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=61587542846477" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Baitush Sharaf Rover Scout Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="site-data.js"></script>
+    <script>
+        // Load event content from site-data.js (editable in the Admin Panel).
+        // If the event is switched OFF in the Admin Panel, this page shows a
+        // "no event scheduled" message instead of the event details.
+        (function () {
+            var content;
+            try {
+                content = (typeof loadSiteContent === "function") ? loadSiteContent() : null;
+            } catch (e) { content = null; }
+
+            var ep = content && content.eventPopup;
+            var offWrap = document.getElementById("evOffWrap");
+            var card = document.getElementById("evContentCard");
+
+            if (!ep || ep.enabled === false) {
+                // Event switched off: hide the event details, show the notice instead.
+                if (card) card.style.display = "none";
+                if (offWrap) offWrap.style.display = "block";
+                return;
+            }
+
+            function setBoth(id, bn, en) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                if (bn != null) el.setAttribute("data-bn", bn);
+                if (en != null) el.setAttribute("data-en", en);
+                // also set the currently-visible text; script.js's language toggle
+                // will keep swapping data-bn/data-en on future toggles
+                var lang = document.documentElement.getAttribute("data-lang");
+                el.textContent = (lang === "en" && en) ? en : (bn != null ? bn : el.textContent);
+            }
+
+            document.title = (ep.titleBn || document.title) + " - বায়তুশ শরফ রোভার স্কাউট গ্রুপ";
+
+            setBoth("evHeroTitle", ep.titleBn, ep.titleEn);
+            setBoth("evTagDate", ep.dateRangeBn, ep.dateRangeEn);
+            setBoth("evTagLocation", ep.locationBn, ep.locationEn);
+            setBoth("evTagDeadline", ep.regDeadlineBn, ep.regDeadlineEn);
+            setBoth("evFactDate", ep.dateRangeBn, ep.dateRangeEn);
+            setBoth("evFactLocation", ep.locationBn, ep.locationEn);
+            setBoth("evFactDeadline", ep.regDeadlineBn, ep.regDeadlineEn);
+            setBoth("evIntro1", ep.introBn1, ep.introEn1);
+            setBoth("evIntro2", ep.introBn2, ep.introEn2);
+
+            if (Array.isArray(ep.schedule) && ep.schedule.length) {
+                var items = document.querySelectorAll("#evTimeline .ev-timeline-item");
+                ep.schedule.forEach(function (day, i) {
+                    var item = items[i];
+                    if (!item) return;
+                    var dayEl = item.querySelector(".ev-day");
+                    var titleEl = item.querySelector(".ev-day-title");
+                    var descEl = item.querySelector(".ev-day-desc");
+                    if (dayEl) { dayEl.setAttribute("data-bn", day.dayBn || ""); dayEl.setAttribute("data-en", day.dayEn || ""); dayEl.textContent = day.dayBn || dayEl.textContent; }
+                    if (titleEl) { titleEl.setAttribute("data-bn", day.titleBn || ""); titleEl.setAttribute("data-en", day.titleEn || ""); titleEl.textContent = day.titleBn || titleEl.textContent; }
+                    if (descEl) { descEl.setAttribute("data-bn", day.descBn || ""); descEl.setAttribute("data-en", day.descEn || ""); descEl.textContent = day.descBn || descEl.textContent; }
+                });
+            }
+
+            var leaderEl = document.getElementById("evContactLeader");
+            var phoneEl = document.getElementById("evContactPhone");
+            var emailEl = document.getElementById("evContactEmail");
+            if (leaderEl && ep.contactLeaderName) leaderEl.textContent = ep.contactLeaderName;
+            if (phoneEl && ep.contactPhone) phoneEl.textContent = ep.contactPhone;
+            if (emailEl && ep.contactEmail) emailEl.textContent = ep.contactEmail;
+
+            var registerLink = document.getElementById("evRegisterLink");
+            if (registerLink && ep.registerLinkUrl) registerLink.setAttribute("href", ep.registerLinkUrl);
+        })();
+
+        // Reveal-on-scroll for this page's sections (site-wide script.js handles nav/dark-mode/language)
+        var revealEls = document.querySelectorAll('.ev-reveal');
+        var revealObserver = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+        revealEls.forEach(function(el){ revealObserver.observe(el); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!-- ==========================================================================
+     EVENT NOTICE POPUP — drop this block in just before </body> on any page
+     where you want the notice to appear (usually index.html / home page).
+
+     ✏️  EDIT ONLY THE VALUES INSIDE "eventNotice" BELOW TO CHANGE THE EVENT.
+     ========================================================================== -->
+
+<div class="en-overlay" id="enOverlay" role="dialog" aria-modal="true" aria-labelledby="enTitle">
+  <div class="en-card">
+    <button class="en-close" id="enClose" aria-label="বন্ধ করুন">&times;</button>
+
+    <div class="en-band">নোটিশ</div>
+
+    <div class="en-body">
+      <h2 class="en-title" id="enTitle">বার্ষিক স্কাউট ক্যাম্পিং ২০২৬</h2>
+      <p class="en-meta">📅 ১৫ অক্টোবর, ২০২৬ &nbsp;•&nbsp; 📍 কক্সবাজার সমুদ্র সৈকত</p>
+      <p class="en-excerpt">
+        বাইতুশ শরফ রোভার স্কাউট গ্রুপের বার্ষিক ক্যাম্পিং অনুষ্ঠিত হতে যাচ্ছে। সকল
+        সদস্যকে অংশগ্রহণের জন্য অনুরোধ করা হচ্ছে। নিবন্ধনের শেষ তারিখ ১০ অক্টোবর।
+      </p>
+
+      <div class="en-actions">
+        <a href="Event.html" class="en-btn en-btn-primary">বিস্তারিত দেখুন</a>
+        <button class="en-btn en-btn-ghost" id="enDismiss">পরে দেখব</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .en-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 22, 44, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+  .en-overlay.en-show { display: flex; }
+
+  .en-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 24px 60px -12px rgba(8, 22, 44, 0.45);
+    font-family: "Segoe UI", "Noto Sans Bengali", sans-serif;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .en-overlay.en-show .en-card { animation: enPop .28s ease; }
+  }
+  @keyframes enPop {
+    from { opacity: 0; transform: translateY(10px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .en-band {
+    background: linear-gradient(90deg, #c9a227, #e8c65a);
+    color: #082c53;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    padding: 7px 20px;
+  }
+
+  .en-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(8,22,44,0.06);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    color: #0a3868;
+    cursor: pointer;
+  }
+  .en-close:hover { background: rgba(8,22,44,0.12); }
+
+  .en-body { padding: 20px 22px 22px; }
+
+  .en-title { margin: 0 0 6px; font-size: 19px; color: #0a3868; font-weight: 800; line-height: 1.35; }
+  .en-meta { margin: 0 0 10px; font-size: 12.5px; color: #6b7488; font-weight: 600; }
+  .en-excerpt { margin: 0 0 18px; font-size: 13.5px; line-height: 1.7; color: #333; }
+
+  .en-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .en-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+  }
+  .en-btn-primary {
+    background: linear-gradient(180deg, #1f6fc4, #0d4a8f);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(13,74,143,0.3);
+  }
+  .en-btn-primary:hover { box-shadow: 0 6px 14px rgba(13,74,143,0.38); }
+  .en-btn-ghost { background: transparent; color: #6b7488; }
+  .en-btn-ghost:hover { color: #0a3868; }
+</style>
+
+<script>
+  (function () {
+    // ---- EDIT THIS: change to a new value whenever you post a new notice ----
+    var eventNotice = { id: "annual-camping-2026" };
+    // --------------------------------------------------------------------------
+
+    var storageKey = "en_seen_" + eventNotice.id;
+    var overlay = document.getElementById("enOverlay");
+
+    function openNotice() {
+      if (sessionStorage.getItem(storageKey)) return;
+      overlay.classList.add("en-show");
+    }
+    function closeNotice() {
+      overlay.classList.remove("en-show");
+      sessionStorage.setItem(storageKey, "1");
+    }
+
+    document.getElementById("enClose").addEventListener("click", closeNotice);
+    document.getElementById("enDismiss").addEventListener("click", closeNotice);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeNotice();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeNotice();
+    });
+
+    window.addEventListener("load", function () {
+      setTimeout(openNotice, 600);
+    });
+  })();
+</script>

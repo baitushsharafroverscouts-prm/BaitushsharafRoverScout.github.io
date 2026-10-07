@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্কাউটিংয়ের লক্ষ্য ও উদ্দেশ্য - বায়তুশ শরফ রোভার স্কাউট গ্রুপ</title>
+    <!-- FontAwesome Font CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS ফাইল লিংক -->
+    <link rel="stylesheet" href="a.style.css">
+    <style>
+        .scout-doc-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: #333;
+        }
+        .scout-doc-card h2 {
+            color: #1b5e20;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 8px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        .scout-doc-card h3 {
+            color: #2e7d32;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .info-box {
+            background: #f4fbf7;
+            border-left: 5px solid #2e7d32;
+            padding: 20px;
+            border-radius: 4px;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            text-align: left;
+        }
+        .info-table th {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-title">
+            <img src="logo.jpg.jpg" alt="Logo" class="logo">
+            <h1 data-bn="বায়তুশ শরফ রোভার স্কাউট গ্রুপ" data-en="Baitush Sharaf Rover Scout Group">বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h1>
+        </div>
+        <header class="hero-header">
+            <div class="settings-container">
+                <button class="three-dots-btn" id="menuToggle"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-settings" id="settingsDropdown">
+                    <div class="setting-item">
+                        <span data-bn="ডার্ক মোড" data-en="Dark Mode">ডার্ক মোড</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span data-bn="ভাষা" data-en="Language">ভাষা</span>
+                        <button id="langToggleBtn" class="lang-btn">English</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <ul class="nav-links">
+            <li><a href="index.html" data-bn="হোম" data-en="Home">হোম</a></li>
+            <li class="dropdown">
+                <a href="#" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="a.html" data-bn="সাধারণ তথ্য" data-en="General Information">সাধারণ তথ্য</a></li>
+                    <li><a href="history.html" data-bn="ইতিহাস ও পটভূমি" data-en="History & Background">ইতিহাস ও পটভূমি</a></li>
+                    <li><a href="Or.html" data-bn="সাংগঠনিক তথ্য" data-en="Organizational Info">সাংগঠনিক তথ্য</a></li>
+                </ul>
+            </li>
+            <li><a href="scout-aims.html" class="active" data-bn="লক্ষ্য ও উদ্দেশ্য" data-en="Aims & Objectives">লক্ষ্য ও উদ্দেশ্য</a></li>
+            <li class="dropdown">
+                <a href="#" data-bn="আবেদন" data-en="Apply">আবেদন <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="scout-admission-form.html" data-bn="গ্রুপ আবেদন" data-en="Apply BSRSG">গ্রুপ আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/registration" target="_blank" data-bn="বিএসআইডি আবেদন" data-en="Apply BSID">বিএসআইডি আবেদন</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 data-bn="স্কাউটিংয়ের লক্ষ্য, উদ্দেশ্য ও মূলনীতি" data-en="Aims, Objectives & Principles of Scouting">স্কাউটিংয়ের লক্ষ্য, উদ্দেশ্য ও মূলনীতি</h1>
+            <p data-bn="একটি আত্মনির্ভরশীল, নৈতিক ও সেবামুখী সমাজ গড়ার সার্বিক দিকনির্দেশনা" data-en="Comprehensive Guidelines for Building a Self-Reliant & Service-Oriented Society">একটি আত্মনির্ভরশীল, নৈতিক ও সেবামুখী সমাজ গড়ার সার্বিক দিকনির্দেশনা</p>
+            <h3>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h3>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <article class="scout-doc-card">
+
+            <!-- Section 1: মূল লক্ষ্য ও উদ্দেশ্য -->
+            <h2>১. স্কাউটিংয়ের মূল লক্ষ্য (Aims of Scouting)</h2>
+            <p>স্কাউটিং আন্দোলনের মূল লক্ষ্য হলো শিশু, কিশোর ও যুবদের শারীরিক, মানসিক, বুদ্ধিবৃত্তিক, সামাজিক ও আধ্যাত্মিক যোগ্যতার পূর্ণ বিকাশ ঘটানো, যাতে তারা দায়িত্বশীল সুনাগরিক এবং স্থানীয়, জাতীয় ও আন্তর্জাতিক সম্প্রদায়ের সদস্য হিসেবে আত্মপ্রকাশ করতে পারে।</p>
+            
+            <div class="grid-2col">
+                <div class="info-box">
+                    <h3>দৃষ্টিভঙ্গি (Vision)</h3>
+                    <p>স্কাউটিংয়ের মাধ্যমে এমন একটি বিশ্ব গড়ে তোলা যেখানে মানুষ ব্যক্তি হিসেবে স্বাবলম্বী হবে এবং সমাজে গঠনমূলক ও সেবামুখী ভূমিকা পালন করবে।</p>
+                </div>
+                <div class="info-box">
+                    <h3>মিশন (Mission)</h3>
+                    <p>স্কাউট প্রতিজ্ঞা ও আইনের ভিত্তিতে মূল্যবোধ ব্যবস্থা প্রয়োগ করে তরুণদের শিক্ষায় অবদান রাখা, যাতে তারা একটি সুন্দর বিশ্ব গঠনে অংশ নিতে পারে।</p>
+                </div>
+            </div>
+
+            <!-- Section 2: কৌশলগত উদ্দেশ্যসমূহ -->
+            <h2>২. স্কাউটিংয়ের প্রধান উদ্দেশ্যসমূহ (Key Objectives)</h2>
+            <ul>
+                <li><strong>চারিত্রিক উন্নতি সাধন:</strong> তরুণদের মনে সত্যবাদিতা, সততা, সহনশীলতা ও আত্মসংযমের মানসিকতা গড়ে তোলা।</li>
+                <li><strong>স্বাস্থ্য ও শারীরিক সক্ষমতা:</strong> মুক্তাঙ্গন কার্যক্রম, হাইকিং, ক্যাম্পিং ও শারীরিক কসরতের মাধ্যমে শরীরকে কর্মক্ষম ও সবল রাখা।</li>
+                <li><strong>আত্মনির্ভরশীলতা অর্জন:</strong> হাতেনাতে কাজ শেখার মাধ্যমে স্বাবলম্বী হওয়া এবং যেকোনো প্রতিকূল পরিবেশে টিকে থাকার কৌশল অর্জন করা।</li>
+                <li><strong>সমাজসেবা ও মানবকল্যাণ:</strong> "প্রতিদিন অন্তত একটি ভালো কাজ করো"—এই নীতি অনুসরণ করে নিঃস্বার্থভাবে সমাজ ও মানুষের সেবা করা।</li>
+                <li><strong>নেতৃত্বের বিকাশ:</strong> ছোট দল ব্যবস্থা (Patrol System) পরিচালনার মাধ্যমে সিদ্ধান্ত গ্রহণের ক্ষমতা ও সাংগঠনিক দক্ষতার উন্নয়ন।</li>
+                <li><strong>পরিবেশ সচেতনতা:</strong> প্রাকৃতিক সম্পদ সংরক্ষণ, বৃক্ষরোপণ এবং পরিবেশবান্ধব জীবনযাত্রায় অভ্যস্ত হওয়া।</li>
+            </ul>
+
+            <!-- Section 3: মৌলিক মূলনীতি -->
+            <h2>৩. স্কাউটিংয়ের তিনটি মৌলিক নীতি (Three Fundamental Principles)</h2>
+            <p>বিশ্ব স্কাউট সংস্থার (WOSM) বিধান অনুযায়ী স্কাউটিং আন্দোলন তিনটি মূল স্তম্ভের ওপর প্রতিষ্ঠিত:</p>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>ক্রম</th>
+                        <th>মূলনীতি (Principles)</th>
+                        <th>ব্যাখ্যা ও তাৎপর্য</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>০১</td>
+                        <td><strong>সৃষ্টিকর্তার প্রতি কর্তব্য (Duty to God)</strong></td>
+                        <td>আধ্যাত্মিক নীতির প্রতি আনুগত্য, নিজ নিজ ধর্মীয় অনুশাসন মেনে চলা এবং ধর্মের শিক্ষাকে জীবনে রূপায়ন করা।</td>
+                    </tr>
+                    <tr>
+                        <td>০২</td>
+                        <td><strong>অপরের প্রতি কর্তব্য (Duty to Others)</strong></td>
+                        <td>সমাজ, দেশ এবং বিশ্ব সম্প্রদায়ের প্রতি বিশ্বস্ত থাকা; শান্তি, বোঝাপড়া ও সহযোগিতার বিকাশ ঘটানো।</td>
+                    </tr>
+                    <tr>
+                        <td>০৩</td>
+                        <td><strong>নিজের প্রতি কর্তব্য (Duty to Self)</strong></td>
+                        <td>নিজের ব্যক্তিত্ব, জ্ঞান, শারীরিক দক্ষতা ও চিন্তা-চেতনার ধারাবাহিক উন্নয়নের দায়িত্ব গ্রহণ করা।</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Section 4: স্কাউট প্রতিজ্ঞা ও আইন -->
+            <h2>৪. স্কাউট প্রতিজ্ঞা ও আইন (Scout Promise & Law)</h2>
+            
+            <h3>স্কাউট প্রতিজ্ঞা (Scout Promise)</h3>
+            <div class="info-box" style="border-left-color: #1b5e20;">
+                <p><em>"আমি আমার শ্রদ্ধার সঙ্গে প্রতিজ্ঞা করছি যে, আমি সৃষ্টিকর্তা ও আমার দেশের প্রতি কর্তব্য পালন করতে, সর্বদা অপরকে সাহায্য করতে এবং স্কাউট আইন মেনে চলতে আমার প্রাণপণ চেষ্টা করব।"</em></p>
+            </div>
+
+            <h3>স্কাউট আইন ৭টি (7 Scout Laws)</h3>
+            <ol>
+                <li>স্কাউট আত্মমর্যাদায় বিশ্বাসী।</li>
+                <li>স্কাউট সবার বন্ধু।</li>
+                <li>স্কাউট বিনয়ী ও বিশ্বস্ত।</li>
+                <li>স্কাউট জীবের প্রতি সদয়।</li>
+                <li>স্কাউট সদাপ্রফুল্ল।</li>
+                <li>স্কাউটমিতব্যয়ী।</li>
+                <li>স্কাউট চিন্তায়, কথায় ও কাজে নির্মল।</li>
+            </ol>
+
+            <!-- Section 5: শাখাভিত্তিক বয়স ও লক্ষ্য -->
+            <h2>৫. বাংলাদেশ স্কাউটসের শাখাভিত্তিক গঠন (Scout Sections)</h2>
+            <p>বয়স ও মানসিক চাহিদার ওপর ভিত্তি করে স্কাউটিংকে তিনটি প্রধান শাখায় ভাগ করা হয়েছে:</p>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>শাখা (Section)</th>
+                        <th>বয়সসীমা</th>
+                        <th>মূল স্লোগান/নীতি</th>
+                        <th>প্রধান উদ্দেশ্য</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>কাব স্কাউট (Cub Scout)</strong></td>
+                        <td>৬ থেকে ১০+ বছর</td>
+                        <td>যথাসাধ্য চেষ্টা করা (Do Your Best)</td>
+                        <td>ছোটবেলা থেকেই সুঅভ্যাস গঠন, বড়দের মান্য করা এবং খেলার ছলে শৃঙ্খলা শেখা।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>স্কাউট (Scout)</strong></td>
+                        <td>১১ থেকে ১৬+ বছর</td>
+                        <td>সদাপ্রস্তুত (Be Prepared)</td>
+                        <td>উডক্রাফট, ক্যাম্পিং, ট্র্যাকিং ও শারীরিক-মানসিক দক্ষতার সমন্বয়ে সুনাগরিক গড়ে ওঠা।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>রোভার স্কাউট (Rover Scout)</strong></td>
+                        <td>১৭ থেকে ২৫ বছর</td>
+                        <td>সেবা (Service)</td>
+                        <td>সমাজসেবা, দুর্যোগ ব্যবস্থাপনা, নেতৃত্ব প্রদান এবং পেশাগত জীবনে স্কাউটিং মূল্যবোধ প্রয়োগ।</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Section 6: বায়তুশ শরফ রোভার স্কাউট গ্রুপের ভূমিকা -->
+            <h2>৬. বায়তুশ শরফ রোভার স্কাউট গ্রুপের প্রতিশ্রুতি</h2>
+            <p>বায়তুশ শরফ রোভার স্কাউট গ্রুপ ইসলামী মূল্যবোধ ও বাংলাদেশ স্কাউটসের নীতিমালার আলোকে রোভারদের গঠনমূলক কাজে নিয়োজিত রাখছে।</p>
+            <ul>
+                <li><strong>জরুরি সাড়াদান:</strong> চট্টগ্রাম জেলা ও জাতীয় পর্যায়ে যেকোনো দুর্যোগকালীন মুহূর্তে মানবিক সহায়তা পরিচালনা।</li>
+                <li><strong>পিআরএস (PRS) অর্জন:</strong> সর্বোচ্চ সম্মাননা 'প্রেসিডেন্ট'স রোভার স্কাউট' অর্জনের জন্য নিবিড় প্রশিক্ষণ প্রদান।</li>
+                <li><strong>রক্তদান কর্মসূচি:</strong> নিয়মিত বিরতিতে রক্তদান শিবিরের আয়োজনের মাধ্যমে জীবন রক্ষায় অবদান রাখা।</li>
+                <li><strong>নৈতিক ও ধর্মীয় প্রশিক্ষণ:</strong> স্কাউট পদ্ধতির পাশাপাশি ইসলামিক অনুশাসন ও চারিত্রিক গঠনের বিশেষ কর্মশালা।</li>
+            </ul>
+
+        </article>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h4>
+                <p>বায়তুশ শরফ কমপ্লেক্স, ডিটি রোড, <br>ধনিয়ালাপাড়া, ডাবলমুরিং, চট্টগ্রাম, 4100।</p>
+                <p>ইমেইল: baitushsharafroverscouts@gmail.com</p>
+                <p>মোবাইল: 01836446216</p>
+            </div>
+            <div class="footer-section">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul>
+                    <li><a href="https://www.bsakm.edu.bd/" target="_blank">Baitush Sharaf Adarsha Kamil Madrasah</a></li>
+                    <li><a href="https://baitushsharaf.org/" target="_blank">Baitush Sharaf</a></li>
+                    <li><a href="https://www.scouts.gov.bd/" target="_blank">বাংলাদেশ স্কাউটস</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>সোশ্যাল মিডিয়া</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=61587542846477" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Baitush Sharaf Rover Scout Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

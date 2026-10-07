@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — বায়তুশ শরফ রোভার স্কাউট গ্রুপ</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+  /* ===== THEME: Scout Green + Gold ===== */
+  :root {
+    --primary: #0f6b4f;
+    --primary-dark: #0b5640;
+    --primary-darker: #07402f;
+    --primary-light: #1c9a73;
+    --gold: #d4a017;
+    --gold-light: #efc95a;
+    --gold-tint: rgba(212, 160, 23, 0.08);
+    --danger: #c0392b;
+    --danger-dark: #a5301f;
+    --success: #1f9d55;
+    --bg: #eef5f2;
+    --card: #ffffff;
+    --border: #dce8e2;
+    --text-muted: #667a72;
+    --soft: #f3f8f6;
+    --ring: rgba(15, 107, 79, 0.14);
+    --shadow: rgba(15, 107, 79, 0.16);
+    --sidebar-width: 272px;
+    --topbar-height: 66px;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Noto Sans Bengali", sans-serif; background: var(--bg); margin: 0; color: #1f2430; }
+  .app-shell { display: flex; min-height: 100vh; }
+
+  /* ===== SIDEBAR ===== */
+  aside.sidebar { width: var(--sidebar-width); background: linear-gradient(180deg, #04271d 0%, var(--primary-darker) 55%, var(--primary-dark) 100%); color: #fff; position: fixed; top: 0; bottom: 0; left: 0; z-index: 200; display: flex; flex-direction: column; box-shadow: 4px 0 24px rgba(0,0,0,0.22); transition: transform 0.3s ease; }
+  .sidebar-header { padding: 20px 18px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; }
+  .sidebar-logo { width: 46px; height: 46px; object-fit: contain; border-radius: 50%; background: var(--card); padding: 3px; border: 2px solid var(--gold); flex-shrink: 0; }
+  .sidebar-header h2 { font-size: 15px; margin: 0; font-weight: 700; color: #fff; line-height: 1.35; }
+  .sidebar-subtitle { font-size: 10.5px; color: rgba(255,255,255,0.6); display: block; margin-top: 3px; letter-spacing: .2px; }
+  .sidebar-status { margin: 12px 16px 4px; padding: 9px 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 9px; display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: rgba(255,255,255,0.85); }
+  .sidebar-status .dot { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 3px rgba(61,220,132,0.25); flex-shrink: 0; }
+  .sidebar-scroll { overflow-y: auto; flex-grow: 1; padding: 10px 0 16px; }
+  .sidebar-scroll::-webkit-scrollbar { width: 5px; }
+  .sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+  .menu-group-label { padding: 14px 20px 6px; font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; }
+  .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+  .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 11px 20px; color: rgba(255,255,255,0.82); text-decoration: none; font-size: 13.3px; font-weight: 500; transition: all 0.15s ease; border-left: 3px solid transparent; position: relative; }
+  .sidebar-menu li a:hover, .sidebar-menu li a.active { background: rgba(255,255,255,0.08); color: #fff; border-left-color: var(--gold); }
+  .sidebar-menu li a.active { box-shadow: inset 0 0 0 1px rgba(212,160,23,0.2); }
+  .sidebar-menu li a i { width: 18px; text-align: center; font-size: 14.5px; color: var(--gold-light); flex-shrink: 0; }
+  .menu-badge { margin-left: auto; background: rgba(255,255,255,0.12); color: #fff; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 20px; min-width: 20px; text-align: center; }
+  .sidebar-menu li a.active .menu-badge { background: var(--gold); color: var(--primary-darker); }
+  .sidebar-footer { padding: 12px 18px 16px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 10.5px; color: rgba(255,255,255,0.4); text-align: center; }
+  .sidebar-overlay { display: none; }
+
+  /* ===== MAIN WRAPPER ===== */
+  .main-wrapper { margin-left: var(--sidebar-width); flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  header.topbar { height: var(--topbar-height); background: var(--card); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 26px; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 14px var(--shadow); border-bottom: 3px solid var(--gold); }
+  #sidebarToggleBtn { display: none; background: none; border: none; font-size: 20px; color: var(--primary-dark); cursor: pointer; padding: 6px; }
+  .topbar-search { flex: 1; max-width: 380px; position: relative; }
+  .topbar-search i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #9aa8a1; font-size: 13px; }
+  .topbar-search input { width: 100%; padding: 9px 14px 9px 34px; border-radius: 20px; border: 1px solid var(--border); background: var(--soft); font-size: 12.8px; font-family: inherit; outline: none; transition: all .2s ease; }
+  .topbar-search input:focus { border-color: var(--primary-light); background: var(--card); box-shadow: 0 0 0 3px var(--ring); }
+  .topbar-right { display: flex; align-items: center; gap: 18px; }
+  .icon-btn { position: relative; background: var(--soft); border: 1px solid var(--border); width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary-dark); cursor: pointer; font-size: 14.5px; transition: all .15s ease; }
+  .icon-btn:hover { background: #e3f1ea; border-color: var(--primary-light); }
+  .admin-chip { display: flex; align-items: center; gap: 10px; padding: 5px 12px 5px 5px; border-radius: 30px; background: var(--soft); border: 1px solid var(--border); cursor: default; }
+  .admin-chip img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); background: #ddd; }
+  .admin-chip .name { font-size: 12.5px; font-weight: 700; color: var(--primary-dark); line-height: 1.2; }
+  .admin-chip .role { font-size: 10px; color: var(--text-muted); }
+  .page-head { padding: 20px 28px 4px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: 1180px; margin: 0 auto; width: 100%; }
+  .page-head > div:first-child { flex: 1 1 420px; min-width: 0; }
+  .breadcrumb { font-size: 11.5px; color: var(--text-muted); margin-bottom: 4px; }
+  .breadcrumb .sep { margin: 0 6px; opacity: .5; }
+  .page-title { font-size: 21px; font-weight: 800; color: var(--primary-darker); margin: 0; display: flex; align-items: center; gap: 10px; }
+  .page-title i { color: var(--gold); }
+  .page-subtext { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+  .top-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .top-actions .btn { white-space: nowrap; }
+  main { max-width: 1180px; width: 100%; margin: 0 auto; padding: 18px 24px 60px; }
+
+  /* ===== STAT OVERVIEW ===== */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 26px; }
+  .stat-card { background: linear-gradient(155deg, #fff 0%, var(--soft) 100%); border: 1px solid var(--border); border-radius: 14px; padding: 18px 18px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 6px 18px -8px var(--shadow); position: relative; overflow: hidden; }
+  .stat-card::after { content: ""; position: absolute; top: -20px; right: -20px; width: 70px; height: 70px; background: var(--stat-color, var(--primary-light)); opacity: .08; border-radius: 50%; }
+  .stat-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--stat-color, var(--primary-light)); color: #fff; flex-shrink: 0; box-shadow: 0 6px 14px -4px var(--stat-color, var(--primary-light)); }
+  .stat-info .num { font-size: 22px; font-weight: 800; color: #1f2430; line-height: 1.1; }
+  .stat-info .label { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; font-weight: 600; }
+
+  /* ===== PANEL ===== */
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 22px; position: relative; scroll-margin-top: calc(var(--topbar-height) + 14px); box-shadow: 0 8px 24px -10px var(--shadow); overflow: hidden; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; cursor: pointer; user-select: none; border-bottom: 2px solid var(--gold-light); }
+  .panel-head:hover { background: var(--soft); }
+  .panel-head h2 { margin: 0; font-size: 16.5px; line-height: 1.35; color: var(--primary-dark); display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  .panel-head h2 .icon-wrap { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(140deg, var(--primary-light), var(--primary)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13.5px; flex-shrink: 0; }
+  .panel-head .chevron { color: var(--text-muted); transition: transform .25s ease; font-size: 14px; }
+  .panel.collapsed .chevron { transform: rotate(-90deg); }
+  .panel-body { padding: 22px; overflow-x: auto; }
+  .panel.collapsed .panel-body { display: none; }
+
+  /* ===== FORMS ===== */
+  .form-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .form-group { flex: 1 1 200px; margin-bottom: 12px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: #3f5149; margin-bottom: 6px; }
+  .form-group input, .form-group textarea, .form-group select, table td input, table td select, table td textarea { width: 100%; padding: 9px 12px; border: 1px solid #cfdcd5; border-radius: 8px; font-size: 13px; font-family: inherit; background: var(--card); box-shadow: inset 0 1px 2px rgba(15,107,79,0.05); transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus, table td input:focus, table td select:focus, table td textarea:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px var(--ring); }
+  textarea { min-height: 80px; resize: vertical; }
+  #sec-event table textarea { min-height: 64px; }
+
+  /* ছবি / ফাইল আপলোড বক্স: থাম্বনেইল + নাম এক লাইনে, ফাইল পিকার নিচে */
+  .file-input-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .file-input-group input[type="text"] { flex: 1 1 110px; min-width: 0; width: auto; }
+  input[type="file"] { padding: 6px 8px !important; background: var(--gold-tint) !important; border: 1px dashed var(--gold) !important; border-radius: 8px; cursor: pointer; max-width: 180px; }
+  .file-input-group input[type="file"] { flex: 1 1 100%; width: 100%; max-width: 100%; }
+
+  /* ===== TABLES ===== */
+  table { width: 100%; min-width: 620px; border-collapse: separate; border-spacing: 0; margin: 14px 0; font-size: 13px; border-radius: 10px; overflow: visible; border: 1px solid var(--border); }
+  table th, table td { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); padding: 9px 10px; text-align: left; vertical-align: middle; }
+  table tr:last-child td { border-bottom: none; }
+  table tr td:last-child, table tr th:last-child { border-right: none; }
+  table tr:hover td { background: var(--soft); }
+  table th { background: linear-gradient(180deg, #eaf5f0 0%, #d3e9df 100%); color: var(--primary-dark); font-weight: 700; border-bottom: 2px solid var(--gold-light); }
+  table th:first-child { border-top-left-radius: 9px; }
+  table th:last-child { border-top-right-radius: 9px; }
+  #sec-exec table { min-width: 1000px; }
+  #sec-achievements table, #sec-unit table { min-width: 760px; }
+  #sec-members table { min-width: 720px; }
+  #sec-event table { min-width: 760px; }
+  #sec-achievements th:last-child { width: 130px !important; }
+  .action-btns { white-space: nowrap; text-align: center; }
+
+  .img-thumb { width: 42px; height: 42px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); background: #eee; display: block; flex-shrink: 0; }
+  .sub-block { background: var(--soft); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 16px; }
+  .sub-block h4 { margin: 0 0 12px; font-size: 14px; color: var(--primary-dark); }
+
+  /* ===== BUTTONS ===== */
+  .btn { border: none; border-radius: 8px; padding: 9px 16px; cursor: pointer; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
+  .btn-primary { background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%); color: #fff; box-shadow: 0 4px 10px var(--shadow); }
+  .btn-primary:hover { box-shadow: 0 6px 14px var(--shadow); transform: translateY(-1px); }
+  .btn-danger { background: linear-gradient(180deg, #e74c3c 0%, var(--danger) 100%); color: #fff; padding: 7px 12px; }
+  .btn-danger:hover { background: linear-gradient(180deg, var(--danger) 0%, var(--danger-dark) 100%); transform: translateY(-1px); }
+  .btn-outline { background: var(--card); border: 1px solid var(--primary); color: var(--primary); }
+  .btn-outline:hover { background: rgba(15,107,79,0.07); }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-big { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--primary-darker); padding: 10px 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(212,160,23,0.3); }
+  .btn-big:hover { box-shadow: 0 6px 16px rgba(212,160,23,0.4); transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+  .card-note { font-size: 12px; font-weight: 600; font-style: normal; color: var(--primary-dark); margin: 18px 0 8px; padding-left: 10px; border-left: 3px solid var(--gold); }
+
+  #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(30px) scale(0.95); background: var(--primary-dark); color: #fff; padding: 12px 24px; border-radius: 8px; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 1000; border-left: 3px solid var(--gold); max-width: 90vw; }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+
+  /* ===== Event on/off switch ===== */
+  .event-toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: var(--gold-tint); border: 1px solid var(--gold); border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; }
+  .event-toggle-row .et-label { font-size: 13.5px; font-weight: 700; color: var(--primary-darker); }
+  .event-toggle-row .et-sub { font-size: 11.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+  .et-switch { position: relative; display: inline-block; width: 50px; height: 28px; flex-shrink: 0; }
+  .et-switch input { opacity: 0; width: 0; height: 0; }
+  .et-slider { position: absolute; cursor: pointer; inset: 0; background-color: #c7d2cc; transition: .25s; border-radius: 34px; }
+  .et-slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: #fff; transition: .25s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+  .et-switch input:checked + .et-slider { background-color: var(--success); }
+  .et-switch input:checked + .et-slider:before { transform: translateX(22px); }
+  .et-status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+  .et-status-badge.on { background: rgba(31,157,85,0.15); color: var(--success); }
+  .et-status-badge.off { background: rgba(192,57,43,0.12); color: var(--danger); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) {
+    aside.sidebar { transform: translateX(-100%); }
+    aside.sidebar.active { transform: translateX(0); }
+    .main-wrapper { margin-left: 0; }
+    #sidebarToggleBtn { display: inline-flex; }
+    .admin-chip .name, .admin-chip .role { display: none; }
+    .topbar-search { display: none; }
+    .sidebar-overlay.active { display: block; position: fixed; inset: 0; background: rgba(3,12,26,0.5); z-index: 150; }
+    .page-head { padding: 16px 16px 4px; }
+    main { padding: 14px 12px 50px; }
+    .panel-body { padding: 14px; }
+    .panel-head { padding: 14px 16px; }
+    .panel-head h2 { font-size: 15px; }
+    header.topbar { padding: 0 14px; }
+    .top-actions { width: 100%; justify-content: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .page-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="logo.jpg.jpg" alt="Group Logo" class="sidebar-logo" onerror="this.onerror=null;this.src='logo.jpg';">
+      <div>
+        <h2>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h2>
+        <span class="sidebar-subtitle">Baitush Sharaf Rover Scout Group</span>
+      </div>
+    </div>
+    <div class="sidebar-status"><span class="dot"></span> সাইট লাইভ &amp; সচল</div>
+
+    <div class="sidebar-scroll">
+      <div class="menu-group-label">হোমপেজ কন্টেন্ট</div>
+      <ul class="sidebar-menu">
+        <li><a href="#sec-header" class="nav-item active"><i class="fas fa-heading"></i> হেডার ও স্লাইডার</a></li>
+        <li><a href="#sec-nav" class="nav-item"><i class="fas fa-bars"></i> মেনু বার</a></li>
+        <li><a href="#sec-event" class="nav-item"><i class="fas fa-bullhorn"></i> ইভেন্ট পপআপ (Event.html) <span class="menu-badge" id="badge-event-status">OFF</span></a></li>
+        <li><a href="#sec-marquee" class="nav-item"><i class="fas fa-bullhorn"></i> স্ক্রলিং নোটিশ</a></li>
+        <li><a href="#sec-pdf" class="nav-item"><i class="fas fa-file-pdf"></i> PDF নোটিশ <span class="menu-badge" id="badge-pdf">0</span></a></li>
+        <li><a href="#sec-gallery" class="nav-item"><i class="fas fa-images"></i> ফটোগ্যালারি <span class="menu-badge" id="badge-gallery">0</span></a></li>
+        <li><a href="#sec-grid" class="nav-item"><i class="fas fa-th-large"></i> ২x২ গ্রিড বক্স</a></li>
+        <li><a href="#sec-profiles" class="nav-item"><i class="fas fa-id-badge"></i> প্রোফাইল সমূহ</a></li>
+        <li><a href="#sec-calendar" class="nav-item"><i class="fas fa-calendar-alt"></i> ইভেন্ট ক্যালেন্ডার <span class="menu-badge" id="badge-cal">0</span></a></li>
+        <li><a href="#sec-important" class="nav-item"><i class="fas fa-link"></i> গুরুত্বপূর্ণ লিংক (Event-I) <span class="menu-badge" id="badge-important">0</span></a></li>
+        <li><a href="#sec-map" class="nav-item"><i class="fas fa-map-marker-alt"></i> ঠিকানা ও ম্যাপ</a></li>
+        <li><a href="#sec-footer" class="nav-item"><i class="fas fa-shoe-prints"></i> ফুটার ও লিঙ্কস</a></li>
+      </ul>
+
+      <div class="menu-group-label">পেজ ম্যানেজমেন্ট</div>
+      <ul class="sidebar-menu">
+        <li><a href="#sec-unit" class="nav-item"><i class="fas fa-clipboard-list"></i> ইউনিট রেজিস্ট্রি (unit.html)</a></li>
+        <li><a href="#sec-achievements" class="nav-item"><i class="fas fa-trophy"></i> আমাদের অর্জন <span class="menu-badge" id="badge-ach">0</span></a></li>
+        <li><a href="#sec-members" class="nav-item"><i class="fas fa-users"></i> সদস্য প্রোফাইল</a></li>
+        <li><a href="#sec-exec" class="nav-item"><i class="fas fa-user-tie"></i> নির্বাহী কমিটি <span class="menu-badge" id="badge-exec">0</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">Baitush Sharaf RSG &copy; 2026 · Admin Panel v2.4</div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <header class="topbar">
+      <button id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
+      <div class="topbar-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="menuSearchInput" placeholder="সেকশন খুঁজুন... (যেমন: গ্যালারি, নোটিশ)">
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" title="সাইট দেখুন" onclick="window.open('index.html','_blank')"><i class="fas fa-external-link-alt"></i></button>
+        <div class="admin-chip">
+          <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='%230f6b4f'/%3E%3Ctext x='15' y='20' font-size='15' text-anchor='middle' fill='white' font-family='sans-serif'%3EA%3C/text%3E%3C/svg%3E" alt="Admin">
+          <div>
+            <div class="name">অ্যাডমিন</div>
+            <div class="role">সুপার অ্যাডমিন</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-head">
+      <div>
+        <div class="breadcrumb">অ্যাডমিন প্যানেল <span class="sep">/</span> ড্যাশবোর্ড</div>
+        <h1 class="page-title"><i class="fas fa-shield-halved"></i> অ্যাডমিন প্যানেল ড্যাশবোর্ড</h1>
+        <p class="page-subtext">ওয়েবসাইটের সব কন্টেন্ট এখান থেকে পরিচালনা করুন। "সব সংরক্ষণ করুন" শুধু এই ব্রাউজারে সেভ করে; সবাইকে দেখাতে "সাইটে প্রকাশ" চেপে পাওয়া site-content.json ফাইলটি index.html এর ফোল্ডারে আপলোড করুন।</p>
+      </div>
+      <div class="top-actions">
+        <button id="resetBtn" class="btn btn-outline"><i class="fas fa-undo"></i> ডিফল্টে ফিরুন</button>
+        <button id="saveAllBtn" class="btn btn-big"><i class="fas fa-save"></i> সব সংরক্ষণ করুন</button>
+      </div>
+    </div>
+
+    <main>
+
+      <!-- ===== STAT OVERVIEW ===== -->
+      <div class="stats-grid">
+        <div class="stat-card" style="--stat-color:#1c9a73;"><div class="stat-icon"><i class="fas fa-file-pdf"></i></div><div class="stat-info"><div class="num" id="statPdf">0</div><div class="label">PDF নোটিশ</div></div></div>
+        <div class="stat-card" style="--stat-color:#d4a017;"><div class="stat-icon"><i class="fas fa-images"></i></div><div class="stat-info"><div class="num" id="statGallery">0</div><div class="label">গ্যালারি ছবি</div></div></div>
+        <div class="stat-card" style="--stat-color:#1f9d55;"><div class="stat-icon"><i class="fas fa-trophy"></i></div><div class="stat-info"><div class="num" id="statAch">0</div><div class="label">অর্জন সমূহ</div></div></div>
+        <div class="stat-card" style="--stat-color:#c0392b;"><div class="stat-icon"><i class="fas fa-calendar-check"></i></div><div class="stat-info"><div class="num" id="statCal">0</div><div class="label">আসন্ন ইভেন্ট</div></div></div>
+      </div>
+
+      <!-- 0. Header (admin.js ভরবে) -->
+      <section id="sec-header" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-heading"></i></span> হেডার — শিরোনাম, লোগো ও স্লাইডার</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+          <div id="headerFormWrap"></div>
+        </div>
+      </section>
+
+      <!-- 1. Nav -->
+      <section id="sec-nav" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-bars"></i></span> মেনু (Navigation)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body"><div id="navFormRows"></div></div>
+      </section>
+
+      <!-- 1.5 Event Popup & Event -->
+      <section id="sec-event" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-bullhorn"></i></span> ইভেন্ট পপআপ ও Event</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+          <div class="event-toggle-row">
+            <div>
+              <div class="et-label">ইভেন্ট পপআপ ও Event পেজ চালু/বন্ধ</div>
+              <div class="et-sub">বন্ধ থাকলে হোমপেজে পপআপ দেখানো হবে না এবং Event-এ "কোনো ইভেন্ট নেই" বার্তা দেখাবে।</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="et-status-badge off" id="eventStatusBadge">বন্ধ</span>
+              <label class="et-switch"><input type="checkbox" id="eventEnabledToggle"><span class="et-slider"></span></label>
+            </div>
+          </div>
+
+          <p class="card-note">পপআপ ও ইভেন্ট পেজের মূল তথ্য:</p>
+          <div class="form-row">
+            <div class="form-group"><label>ইভেন্টের শিরোনাম (বাংলা)</label><input type="text" id="evTitleBn" placeholder="বার্ষিক স্কাউট ক্যাম্পিং ২০২৬"></div>
+            <div class="form-group"><label>Event Title (English)</label><input type="text" id="evTitleEn" placeholder="Annual Scout Camping 2026"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>তারিখ (বাংলা)</label><input type="text" id="evDateBn" placeholder="১৫–১৭ অক্টোবর, ২০২৬"></div>
+            <div class="form-group"><label>Date (English)</label><input type="text" id="evDateEn" placeholder="Oct 15–17, 2026"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>স্থান (বাংলা)</label><input type="text" id="evLocationBn" placeholder="কক্সবাজার সমুদ্র সৈকত"></div>
+            <div class="form-group"><label>Location (English)</label><input type="text" id="evLocationEn" placeholder="Cox's Bazar Sea Beach"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>নিবন্ধনের শেষ তারিখ (বাংলা)</label><input type="text" id="evDeadlineBn" placeholder="নিবন্ধন শেষ: ১০ অক্টোবর"></div>
+            <div class="form-group"><label>Registration Deadline (English)</label><input type="text" id="evDeadlineEn" placeholder="Registration closes: Oct 10"></div>
+          </div>
+
+          <p class="card-note">হোমপেজ পপআপের সংক্ষিপ্ত বিবরণ:</p>
+          <div class="form-row">
+            <div class="form-group"><label>পপআপ বিবরণ (বাংলা)</label><textarea id="evPopupExcerptBn" placeholder="পপআপে দেখানোর সংক্ষিপ্ত বিবরণ লিখুন"></textarea></div>
+            <div class="form-group"><label>Popup Excerpt (English)</label><textarea id="evPopupExcerptEn" placeholder="Short popup description"></textarea></div>
+          </div>
+
+          <p class="card-note">Event.html পেজের বিস্তারিত বিবরণ (দুইটি অনুচ্ছেদ):</p>
+          <div class="form-row">
+            <div class="form-group"><label>বিবরণ অনুচ্ছেদ ১ (বাংলা)</label><textarea id="evIntro1Bn"></textarea></div>
+            <div class="form-group"><label>Intro Paragraph 1 (English)</label><textarea id="evIntro1En"></textarea></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>বিবরণ অনুচ্ছেদ ২ (বাংলা)</label><textarea id="evIntro2Bn"></textarea></div>
+            <div class="form-group"><label>Intro Paragraph 2 (English)</label><textarea id="evIntro2En"></textarea></div>
+          </div>
+
+          <p class="card-note">সময়সূচি (৩ দিন):</p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:12%;">দিন (বাংলা/English)</th>
+                <th style="width:38%;">শিরোনাম (বাংলা/English)</th>
+                <th style="width:50%;">বিবরণ (বাংলা/English)</th>
+              </tr>
+            </thead>
+            <tbody id="evScheduleBody"></tbody>
+          </table>
+
+          <p class="card-note">নিবন্ধন ও যোগাযোগ:</p>
+          <div class="form-row">
+            <div class="form-group"><label>নিবন্ধন ফর্ম লিংক</label><input type="text" id="evRegisterLink" placeholder="https://..."></div>
+            <div class="form-group"><label>গ্রুপ লিডারের নাম</label><input type="text" id="evContactLeaderName" placeholder="নাম বসান"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>ফোন</label><input type="text" id="evContactPhone" placeholder="01XXXXXXXXX"></div>
+            <div class="form-group"><label>ইমেইল</label><input type="email" id="evContactEmail" placeholder="example@gmail.com"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Marquee -->
+      <section id="sec-marquee" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-bullhorn"></i></span> নোটিশ বোর্ড (Marquee টেক্সট)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-group"><label>স্ক্রলিং নোটিশ টেক্সট</label><textarea id="marqueeText"></textarea></div>
+        </div>
+      </section>
+
+      <!-- 3. PDF Notices -->
+      <section id="sec-pdf" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-file-pdf"></i></span> নোটিশ বোর্ড (PDF আপলোড)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:30%;">শিরোনাম (বাংলা)</th>
+              <th style="width:30%;">Title (English)</th>
+              <th style="width:30%;">PDF ফাইল সিলেক্ট করুন</th>
+              <th style="width:10%;">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="noticesBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addNoticeRow()"><i class="fas fa-plus"></i> নতুন নোটিশ যোগ করুন</button>
+        </div>
+      </section>
+
+      <!-- 4. Gallery -->
+      <section id="sec-gallery" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-images"></i></span> ফটোগ্যালারি (ছবি আপলোড)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:40%;">ছবির ফাইলের নাম ও ফাইল আপলোড</th>
+              <th style="width:25%;">ক্যাপশন (বাংলা)</th>
+              <th style="width:25%;">Caption (English)</th>
+              <th style="width:10%;">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="galleryBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addGalleryRow()"><i class="fas fa-plus"></i> নতুন ছবি যোগ করুন</button>
+        </div>
+      </section>
+
+      <!-- 5. Grid boxes -->
+      <section id="sec-grid" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-th-large"></i></span> ২x২ গ্রিড বক্স</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body"><div id="gridBoxesWrap"></div></div>
+      </section>
+
+      <!-- 6. Profiles Section (admin.js ভরবে) -->
+      <section id="sec-profiles" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-id-badge"></i></span> সাইডবার প্রোফাইল সমূহ</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+          <div id="profilesWrap"></div>
+        </div>
+      </section>
+
+      <!-- 7. Calendar -->
+      <section id="sec-calendar" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-calendar-alt"></i></span> ইভেন্ট ক্যালেন্ডার</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-group" style="max-width:260px;">
+          <label>মাস ও বছর</label>
+          <input type="text" id="calMonthYearInput" placeholder="সেপ্টেম্বর ২০২৬">
+        </div>
+        <table>
+          <thead><tr><th>তারিখ</th><th>ইভেন্ট বিবরণ</th><th>অ্যাকশন</th></tr></thead>
+          <tbody id="calEventsBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addCalRow()"><i class="fas fa-plus"></i> নতুন ইভেন্ট যোগ করুন</button>
+        </div>
+      </section>
+
+      <!-- 7.5 Important Links (Event-I card) -->
+      <section id="sec-important" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-link"></i></span> গুরুত্বপূর্ণ লিংক (Event-I কার্ড)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+          <div class="form-row">
+            <div class="form-group"><label>কার্ডের শিরোনাম (বাংলা)</label><input type="text" id="impTitleBn"></div>
+            <div class="form-group"><label>Card Title (English)</label><input type="text" id="impTitleEn"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>ট্যাগ লেখা (বাংলা)</label><input type="text" id="impHeaderBn"></div>
+            <div class="form-group"><label>Tag Text (English)</label><input type="text" id="impHeaderEn"></div>
+          </div>
+          <table>
+            <thead><tr><th style="width:28%;">বাংলা</th><th style="width:28%;">English</th><th style="width:30%;">লিঙ্ক (URL)</th><th style="width:14%;">অ্যাকশন</th></tr></thead>
+            <tbody id="importantLinksBody"></tbody>
+          </table>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addImportantLinkRow()"><i class="fas fa-plus"></i> নতুন লিংক যোগ করুন</button>
+        </div>
+      </section>
+
+      <!-- 8. Address & Map -->
+      <section id="sec-map" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-map-marker-alt"></i></span> ঠিকানা ও ম্যাপ</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-group"><label>ঠিকানা (সাইডবার কার্ডে দেখাবে)</label><input type="text" id="addressInput"></div>
+        <div class="form-group"><label>Google Maps Embed URL (iframe src)</label><textarea id="mapEmbedInput"></textarea></div>
+        </div>
+      </section>
+
+      <!-- 9. Footer -->
+      <section id="sec-footer" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-shoe-prints"></i></span> ফুটার</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-group"><label>ফুটার ঠিকানা</label><input type="text" id="footerAddressInput"></div>
+        <div class="form-row">
+          <div class="form-group"><label>ট্যাগলাইন (বাংলা)</label><input type="text" id="footerTaglineInput"></div>
+          <div class="form-group"><label>Tagline (English)</label><input type="text" id="footerTaglineEnInput"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>ইমেইল</label><input type="email" id="footerEmailInput"></div>
+          <div class="form-group"><label>ফোন নম্বর</label><input type="text" id="footerPhoneInput"></div>
+        </div>
+        <div class="form-group"><label>কপিরাইট টেক্সট</label><input type="text" id="footerCopyrightInput" placeholder="© 2026 Baitush Sharaf Rover Scout Group. All Rights Reserved."></div>
+
+        <p class="card-note">দ্রুত লিংক (Quick Links):</p>
+        <table>
+          <thead><tr><th>বাংলা</th><th>English</th><th>লিঙ্ক</th><th>অ্যাকশন</th></tr></thead>
+          <tbody id="quickLinksBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addQuickLinkRow()"><i class="fas fa-plus"></i> নতুন লিংক যোগ করুন</button>
+
+        <p class="card-note">সোশ্যাল মিডিয়া লিংক:</p>
+        <div id="socialLinksWrap" class="form-row"></div>
+        </div>
+      </section>
+
+      <!-- 10. Unit page (unit.html) -->
+      <section id="sec-unit" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-clipboard-list"></i></span> ইউনিট রেজিস্ট্রি ও ইভেন্ট </h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>ইউনিট পেজের হেডার শিরোনাম (বাংলা)</label>
+            <input type="text" id="unitHeaderTitleInput" placeholder="বায়তুশ শরফ আদর্শ কামিল মাদ্রাসা রোভার স্কাউট গ্রুপ">
+          </div>
+        </div>
+
+        <div class="sub-block">
+          <h4><i class="fas fa-flag"></i> বাংলাদেশ স্কাউটস রেজিস্ট্রি</h4>
+          <div class="form-row">
+            <div class="form-group"><label>জাতীয় রেজিস্ট্রেশন নং</label><input type="text" id="unitNatRegNo"></div>
+            <div class="form-group"><label>সংগঠন</label><input type="text" id="unitNatOrg"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="flex:2 1 300px;"><label>গ্রুপের নাম</label><input type="text" id="unitNatGroupName"></div>
+            <div class="form-group"><label>স্ট্যাটাস</label><input type="text" id="unitNatStatus" placeholder="সক্রিয় (Active)"></div>
+          </div>
+        </div>
+
+        <div class="sub-block">
+          <h4><i class="fas fa-map-marker-alt"></i> জেলা স্কাউটস রেজিস্ট্রি</h4>
+          <div class="form-row">
+            <div class="form-group"><label>জেলা রেজিস্ট্রেশন নং</label><input type="text" id="unitDistRegNo"></div>
+            <div class="form-group"><label>জেলা রোভার</label><input type="text" id="unitDistRover"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>অঞ্চল</label><input type="text" id="unitDistRegion"></div>
+            <div class="form-group"><label>অবস্থান</label><input type="text" id="unitDistLocation"></div>
+          </div>
+        </div>
+
+        <p class="card-note">কার্যক্রম ও অর্জনের সময়সূচি (ইভেন্ট টেবিল — নং কলাম স্বয়ংক্রিয়ভাবে বসবে):</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:50%;">ইভেন্ট ও কার্যক্রমের বিবরণ</th>
+              <th style="width:22%;">তারিখ / সময়সূচি</th>
+              <th style="width:22%;">স্থান / আয়োজক</th>
+              <th style="width:6%;">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="unitEventsBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addUnitEventRow()"><i class="fas fa-plus"></i> নতুন কার্যক্রম/ইভেন্ট যোগ করুন</button>
+        </div>
+      </section>
+
+      <!-- 11. Achievements page (amader_orjon.html) -->
+      <section id="sec-achievements" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-trophy"></i></span> আমাদের অর্জন </h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-row">
+          <div class="form-group"><label>হিরো শিরোনাম</label><input type="text" id="achHeadingInput" placeholder="আমাদের সাফল্য ও অর্জনসমূহ"></div>
+          <div class="form-group"><label>হিরো সাব-টেক্সট</label><input type="text" id="achSubInput" placeholder="সেবা, শৃঙ্খলা ও দক্ষতার গৌরবময় ইতিহাস"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>সেকশন শিরোনাম</label><input type="text" id="achSectionTitleInput" placeholder="গ্রুপের অর্জনের তালিকা"></div>
+        </div>
+        <div class="form-group"><label>সেকশন ভূমিকা টেক্সট</label><textarea id="achSectionIntroInput"></textarea></div>
+
+        <p class="card-note">অর্জনের তালিকা (ক্রমিক কলাম স্বয়ংক্রিয়ভাবে বসবে):</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">বছর</th>
+              <th style="width:26%;">অর্জনের বিষয় / শিরোনাম</th>
+              <th style="width:18%;">বিভাগ / পর্যায়</th>
+              <th style="width:40%;">বিস্তারিত / বিবরণ</th>
+              <th style="width:6%;">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="achievementsBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addAchievementRow()"><i class="fas fa-plus"></i> নতুন অর্জন যোগ করুন</button>
+        </div>
+      </section>
+
+      <!-- 12. Members page -->
+      <section id="sec-members" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-users"></i></span> সদস্য প্রোফাইল (সদস্য পেজ)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+        <div class="form-row">
+          <div class="form-group"><label>হিরো শিরোনাম</label><input type="text" id="memHeadingInput"></div>
+          <div class="form-group"><label>হিরো সাব-টেক্সট</label><input type="text" id="memSubInput"></div>
+          <div class="form-group"><label>গ্রুপের নাম</label><input type="text" id="memGroupInput"></div>
+        </div>
+        <div id="membersWrap"></div>
+        </div>
+      </section>
+
+      <!-- 13. Executive Committee page (crew-council.html) -->
+      <section id="sec-exec" class="panel">
+        <div class="panel-head" onclick="togglePanel(this)">
+          <h2><span class="icon-wrap"><i class="fas fa-user-tie"></i></span> নির্বাহী কমিটি (Crew-Council)</h2>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-body">
+
+        <p class="card-note">ক্রু কাউন্সিল সদস্য তালিকা:</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:16%;">ছবি (আপলোড)</th>
+              <th style="width:7%;">ইনিশিয়াল</th>
+              <th style="width:16%;">নাম</th>
+              <th style="width:16%;">পদবি (বাংলা)</th>
+              <th style="width:16%;">Role (English)</th>
+              <th style="width:10%;">BSID</th>
+              <th style="width:12%;">যোগদানের তারিখ</th>
+              <th style="width:7%;">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="execCrewBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addExecRow('execCrewBody')"><i class="fas fa-plus"></i> নতুন সদস্য যোগ করুন</button>
+
+        <p class="card-note" style="margin-top:22px;">ক্রু কাউন্সিল - Rover: পরিচিতি অংশ</p>
+        <div class="form-row">
+          <div class="form-group"><label>সালাম (বাংলা)</label><input type="text" id="execRoverSalamBn"></div>
+          <div class="form-group"><label>Salam (English)</label><input type="text" id="execRoverSalamEn"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>প্রতিষ্ঠানের নাম (বাংলা)</label><input type="text" id="execRoverOrgBn"></div>
+          <div class="form-group"><label>Organization Name (English)</label><input type="text" id="execRoverOrgEn"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>কাউন্সিলের নাম (বাংলা)</label><input type="text" id="execRoverCouncilBn"></div>
+          <div class="form-group"><label>Council Name (English)</label><input type="text" id="execRoverCouncilEn"></div>
+        </div>
+
+        <p class="card-note">ক্রু কাউন্সিল - Rover সদস্য তালিকা:</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:16%;">ছবি (আপলোড)</th>
+              <th style="width:7%;">ইনিশিয়াল</th>
+              <th style="width:16%;">নাম</th>
+              <th style="width:16%;">পদবি (বাংলা)</th>
+              <th style="width:16%;">Role (English)</th>
+              <th style="width:10%;">BSID</th>
+              <th style="width:12%;">যোগদানের তারিখ</th>
+              <th style="width:7%;">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="execRoverBody"></tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-sm" onclick="addExecRow('execRoverBody')"><i class="fas fa-plus"></i> নতুন সদস্য যোগ করুন</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="site-data.js"></script>
+<script src="admin.js"></script>
+
+<script>
+  /* NOTE: addNoticeRow / addGalleryRow / addSliderRow এখানে নেই — সেগুলো admin.js এ আছে।
+     (আগে এখানে দ্বিতীয় কপি থাকায় admin.js এরটা override হয়ে "সংরক্ষণ" ভেঙে যেত।) */
+
+  // Sidebar navigation: active class + smooth scroll
+  document.querySelectorAll('.sidebar-menu a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
+      this.classList.add('active');
+      const targetElement = document.querySelector(this.getAttribute('href'));
+      if (targetElement) {
+        const panel = targetElement.closest('.panel');
+        if (panel && panel.classList.contains('collapsed')) panel.classList.remove('collapsed');
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('sidebarOverlay').classList.remove('active');
+      }
+    });
+  });
+
+  // Panel collapse/expand
+  function togglePanel(headEl) { headEl.closest('.panel').classList.toggle('collapsed'); }
+
+  // Sidebar toggle for mobile
+  const sidebarEl = document.getElementById('sidebar');
+  const overlayEl = document.getElementById('sidebarOverlay');
+  document.getElementById('sidebarToggleBtn').addEventListener('click', () => {
+    sidebarEl.classList.toggle('active');
+    overlayEl.classList.toggle('active');
+  });
+  overlayEl.addEventListener('click', () => {
+    sidebarEl.classList.remove('active');
+    overlayEl.classList.remove('active');
+  });
+
+  // Sidebar menu search filter
+  document.getElementById('menuSearchInput').addEventListener('input', function () {
+    const q = this.value.trim().toLowerCase();
+    document.querySelectorAll('.sidebar-menu li').forEach(li => {
+      li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+
+  // Stat / badge counters
+  function refreshStats() {
+    const counts = {
+      pdf: document.querySelectorAll('#noticesBody tr').length,
+      gallery: document.querySelectorAll('#galleryBody tr').length,
+      ach: document.querySelectorAll('#achievementsBody tr').length,
+      cal: document.querySelectorAll('#calEventsBody tr').length,
+      exec: document.querySelectorAll('#execCrewBody tr').length + document.querySelectorAll('#execRoverBody tr').length
+    };
+    const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    setText('statPdf', counts.pdf);
+    setText('statGallery', counts.gallery);
+    setText('statAch', counts.ach);
+    setText('statCal', counts.cal);
+    setText('badge-pdf', counts.pdf);
+    setText('badge-gallery', counts.gallery);
+    setText('badge-ach', counts.ach);
+    setText('badge-cal', counts.cal);
+    setText('badge-exec', counts.exec);
+  }
+  window.addEventListener('load', () => setTimeout(refreshStats, 300));
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.btn-danger')) { setTimeout(refreshStats, 50); }
+  });
+
+  // Page load hole prothom panel chhara baki gulo bondho thakbe
+  // (bondho panel er data DOM e thake, tai save/publish thik kaj kore)
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.panel').forEach((p, i) => {
+      if (i > 0) p.classList.add('collapsed');
+    });
+  });
+</script>
+</body>
+</html>

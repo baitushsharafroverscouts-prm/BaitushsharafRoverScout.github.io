@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্কাউট আইন, প্রতিজ্ঞা ও পরিচিতি - বাংলাদেশ স্কাউটস</title>
+    <!-- FontAwesome Font CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS ফাইল লিংক -->
+    <link rel="stylesheet" href="a.style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-title">
+            <img src="logo.jpg.jpg" alt="Logo" class="logo">
+            <h1 data-bn="বায়তুশ শরফ রোভার স্কাউট গ্রুপ" data-en="Baitush Sharaf Rover Scout Group">বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h1>
+        </div>
+        <header class="hero-header">
+            <div class="settings-container">
+                <button class="three-dots-btn" id="menuToggle"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-settings" id="settingsDropdown">
+                    <div class="setting-item">
+                        <span data-bn="ডার্ক মোড" data-en="Dark Mode">ডার্ক মোড</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span data-bn="ভাষা" data-en="Language">ভাষা</span>
+                        <button id="langToggleBtn" class="lang-btn">English</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <ul class="nav-links">
+            <li><a href="index.html" data-bn="হোম" data-en="Home">হোম</a></li>
+
+            <li class="dropdown">
+                <a href="#" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="a.html" data-bn="সাধারণ তথ্য" data-en="General Information">সাধারণ তথ্য</a></li>
+                    <li><a href="Or.html" data-bn="সাংগঠনিক তথ্য" data-en="Organizational Info">সাংগঠনিক তথ্য</a></li>
+                </ul>
+            </li>
+
+             <li class="dropdown">
+                        <a href="#" data-bn="সংবাদ ও মিডিয়া" data-en="News & Media">সংবাদ ও মিডিয়া <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <!-- Media With Sub-menu -->
+                            <li class="has-submenu">
+                                <a href="#" data-bn="মিডিয়া" data-en="Media">মিডিয়া <i class="fas fa-caret-right"></i></a>
+                                <ul class="sub-dropdown-menu">
+                                    <li><a href="https://www.facebook.com/profile.php?id=61593251926789" data-bn="Walk Talk Shoot" data-en="Walk Talk Shoot">Walk Talk Shoot</a></li>
+                                    <li><a href="https://www.facebook.com/BaitushSharafNews" data-bn="Baitush Sharaf News" data-en="Baitush Sharaf News">Baitush Sharaf News</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="#" data-bn="ওয়েবসাইট" data-en="Website">ওয়েবসাইট <i class="fas fa-caret-right"></i></a>
+                                <ul class="sub-dropdown-menu">
+                                    <li><a href="https://www.bsakm.edu.bd/" data-bn="Baitush sharaf Adarsha Kamil Madrasah" data-en="Baitush sharaf Adarsha Kamil Madrasah">Baitush sharaf Adarsha Kamil Madrasah</a></li>
+                                    <li><a href="https://baitushsharaf.org/" data-bn="Baitush Sharaf" data-en="Baitush Sharaf">Baitush Sharaf</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li><a href="#" data-bn="ছবি" data-en="Photos">ছবি</a></li>
+                            <li><a href="#" data-bn="ভিডিও" data-en="Video">ভিডিও</a></li>
+                        </ul>
+                </li>
+
+            <li class="dropdown">
+                <a href="#" data-bn="প্রকল্প" data-en="Projects">প্রকল্প <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" data-bn="এসডিজি প্রকল্প" data-en="SDG Projects">এসডিজি প্রকল্প</a></li>
+                    <li><a href="#" data-bn="মেসেঞ্জার অব পিস (MoP)" data-en="Messengers of Peace">মেসেঞ্জার অব পিস (MoP)</a></li>
+                    <li><a href="#" data-bn="পরিবেশ ও বৃক্ষরোপণ" data-en="Tree Plantation & Environment">পরিবেশ ও বৃক্ষরোপণ</a></li>
+                    <li><a href="#" data-bn="রক্তদান ও স্বাস্থ্যসেবা" data-en="Blood Donation & Health">রক্তদান ও স্বাস্থ্যসেবা</a></li>
+                    <li><a href="#" data-bn="দুর্যোগ ব্যবস্থাপনা ও ত্রাণ" data-en="Disaster Relief Project">দুর্যোগ ব্যবস্থাপনা ও ত্রাণ</a></li>
+                    <li><a href="#" data-bn="ক্লিন ও গ্রীন প্রজেক্ট" data-en="Clean & Green Project">ক্লিন ও গ্রীন প্রজেক্ট</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" data-bn="আবেদন" data-en="Apply">আবেদন <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="scout-admission-form.html" data-bn="বাইতুশ শরফ রোভার স্কাউট গ্রুপ আবেদন" data-en="Apply BSRSG">গ্রুপ আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/registration" target="_blank" data-bn="বিএসআইডি আবেদন" data-en="Apply BSID">বিএসআইডি আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/user-verify" target="_blank" data-bn="স্কাউট আইডি যাচাই" data-en="Verification of Scout ID">স্কাউট আইডি যাচাই</a></li>
+                </ul>
+            </li>
+
+            
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>স্কাউট নীতিমালা, আইন ও পূর্ণাঙ্গ রূপরেখা</h1>
+            <p>একটি আদর্শ ও অনুকরণীয় চরিত্র গঠনের মূল ভিত্তি</p>
+            <h3>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h3>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <article class="content-card">
+
+            <!-- 1. Scout Promise -->
+            <h2>১. স্কাউট প্রতিজ্ঞা (Scout Promise)</h2>
+            <blockquote style="background: #f4f4f4; padding: 15px; border-left: 5px solid #2e7d32; font-style: italic; margin-bottom: 20px;">
+               <b> "আমি আমার আত্মমর্যাদার উপর নির্ভর করে প্রতিজ্ঞা করছি যে,</br>
+                    আল্লাাহ ও আমার দেশের প্রতি কর্তব্য পালন করতে</br>
+
+                    সর্বদা অপরকে সাহায্য করতে</br>
+
+                    স্কাউট আইন মেনে চলতে</br>
+                    আমি আমার যথাসাধ্য চেষ্টা করব।</br>
+                </b>
+
+                (আল্লাাহ্ শব্দের পরিবর্তে নিজ ধর্ম বিশ্বাস অনুসারে সৃষ্টিকর্তার নাম উচ্চারণ করা যাবে)"</br>
+                <br>যথাসাধ্য চেষ্টা করা : জীবনে সফলতার মূল চাবিকাঠি হলো চেষ্টা। চেষ্টার মাধ্যমেই স্কাউটদের সাতটি আইন মেনে চলতে পারলে যে কোন কাজ সফলভাবে সম্পন্ন করা সম্ভব। 
+                সবকিছু সব সময় সফল করা যায় না। তবে সফলতার জন্য তুমি যে চেষ্টা করবে তার মূল্য অনেক। 
+                কাজে প্রমান করতে না পারলেও তোমার সাধ্যমত চেষ্টা করার জন্যই অনেকের কল্যাণ হবে এবং কাজের লক্ষ্য অর্জনের পথ খুলে যাবে।
+                 স্কাউটিং তোমার ক্ষমতার বাইরে কাজ চায় না। কোন রকম জোরজুলুমও করা হয় না, 
+                 বরং এটা নিশ্চিত করতে চায় তুমি খোলা মনে কাজ করছ।
+            </blockquote>
+           
+            <!-- 2. Scout Law -->
+            <h2>২. স্কাউট আইন (Scout Law)</h2>
+            <p>বাংলাদেশ স্কাউটসের ৭টি সুনির্দিষ্ট আইন রয়েছে, যা প্রত্যেক স্কাউটকে দৈনন্দিন জীবনে মেনে চলতে হয়:</p>
+            <ol style="line-height: 1.8; margin-left: 20px; font-weight: bold;">
+                স্কাউট আইন ৭ (সাত) টি। আইন গুলো হচ্ছে-
+                <li>স্কাউট আত্মমর্যাদায় বিশ্বাসী</li>
+                <li>স্কাউট সকলের বন্ধু</li>
+                <li>স্কাউট বিনয়ী ও অনুগত</li>
+                <li>স্কাউট জীবের প্রতি সদয়</li>
+                <li>স্কাউট সদা প্রফুল্ল</li>
+                <li>স্কাউট মিতব্যয়ী</li>
+                <li>স্কাউট চিন্তা, কথা ও কাজে নির্মল</li>
+            </ol>
+                স্কাউট আইনের তাৎপর্য ও ব্যাখ্যা : স্কাউট আইন সুনাগরিক হবার ভিত্তি। এটি এমন আচরণবিধি বা নীতিমালা, 
+                যা একজন স্কাউট অবশ্যই মেনে চলবে। স্কাউট আইনে সুস্পষ্ট ইতিবাচক গুণাবলী ও কর্তব্যের যে বিধান রয়েছে তাতে রয়েছে সম্মান (Honour), 
+                আনুগত্য (Loyalty), সাহায্য (Help), বন্ধুত্ব (Friendship), বিনয় (Courtesy), সাহস (Courage), প্রফুল্লতা (Cheerfulness) 
+                এবং মিতব্যয়িতা (Thriftiness) ইত্যাদি তা একজন ছেলে বা মেয়ের চরিত্র ও ব্যক্তিত্বকে মজবুত ও দৃঢ় করে। 
+                স্কাউট জীবন ঐ সকল বৈশিষ্ট্যের বাস্তব রূপায়নের পথ নির্দেশ করে। এরকম দৈনিক সৎকাজ (Good Turn), 
+                অপরের জন্য ভাবার এবং কাজ করার অভ্যাস তৈরি করে।</br>
+            <!-- 3. Scout Motto -->
+            <h2>৩. স্কাউট মূলমন্ত্র (Scout Motto)</h2>
+            <div class="table-responsive">
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>শাখা</th>
+                            <th>মূলমন্ত্র (Motto)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>কাব স্কাউট (Cub Scout)</td>
+                            <td>যথাসাধ্য চেষ্টা করা (Do Your Best)</td>
+                        </tr>
+                        <tr>
+                            <td>স্কাউট (Scout)</td>
+                            <td>সদা প্রস্তুত (Be Prepared)</td>
+                        </tr>
+                        <tr>
+                            <td>রোভার স্কাউট (Rover Scout)</td>
+                            <td>সেবাদান (Service)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>স্কাউট স্লোগান</h2>
+           <h4> <p>“প্রতিদিন কারো না কারো উপকার করা” এটি হচ্ছে স্কাউটদের স্লোগান। 
+            ইংরেজিতে বলা হয় “Do a good turn daily” এটি স্কাউটদের একটি বৈশিষ্ট্যও বটে।</p></brS> </h4>
+            এই স্লোগান স্কাউট প্রতিজ্ঞার একটি অংশ হওয়ায় এর গুরুত্ব অনেক। প্রতিদিন বিভিন্নভাবে এই স্লোগানকে বাস্তবায়িত করা যায়। যেমন :   
+                # কারো চিঠি লিখে দেয়া।</br>
+                # কারো চিঠি পোস্ট করে দেয়া।</br>
+                # ডাকটিকিট কিনে এনে দেয়া।</br>
+                # কাউকে বাজার করে দেয়া।</br>
+                # কারো কিছু হারিয়ে গেলে খোঁজ করে দেয়া।</br>
+                # কারো জিনিস পড়ে গেলে তুলে দেয়া।</br>
+                # অন্ধকে পথ পার হতে সাহায্য করা।</br>
+                # বয়স্ক লোককে এগিয়ে দেয়া।</br>
+                # পথ থেকে ইট, পাথর, কাঁটা, কলার খোসা তুলে যথাস্থানে রাখা।</br>
+                # পথের গর্ত ভরে দেয়া।</br>
+                # শিশুকে পথ পার হতে সাহায্য করা।</br>
+                # পথে পাওয়া ছেলেকে বাড়ি পৌঁছে দেয়া।</br>
+                # মুসল্লিদের ওজুর পানি এনে দেয়া।</br>
+                # মসজিদ/উপাসনালয় ধুয়ে পরিস্কার করা।</br>
+                # পথচারীকে পথ দেখিয়ে দেয়া।</br>
+                # কাউকে বাসা খুঁজে পেতে সাহায্য করা।</br>
+                # ঝগড়া বিবাদ থামিয়ে দেয়া।</br>
+                # লাশ দাফনে সাহায্য করা।</br>
+                # আহতকে প্রাথমিক প্রতিবিধান দেয়া।</br>
+                # পশু পাখিকে অত্যাচার থেকে রক্ষা করা।</br>
+                # কাউকে গাড়িতে চড়তে সাহায্য করা।</br>
+                # বন্যার সময় ত্রাণকার্যে যোগদান করা।</br>
+                # ঝড় বিধ্বস্ত এলাকায় বা আগুন লাগা এলাকায় ত্রাণ কাজ করা।</br>
+                # সমাজের চাহিদা অনুযায়ী ভাল কাজে নিজেকে নিয়োজিত করা। </br>  
+                এভাবে ছোট হোক, বড় হোক যে কোন কাজ করে মানুষের সেবা করাই স্কাউট স্লোগানের মূল উদ্দেশ্য। </br>  
+            <!-- 4. Three Fundamental Principles -->
+            <br><h2>৪. স্কাউটিংয়ের মূল তিনটি নীতি (Three Fundamental Principles)</h2>
+            <ul>
+                <li><strong>স্রষ্টার প্রতি কর্তব্য (Duty to God):</strong> নিজের ধর্মীয় বিশ্বাসের প্রতি অনুগত থাকা এবং ধর্মীয় বিধান মেনে চলা।</li>
+                <li><strong>অন্যের প্রতি কর্তব্য (Duty to Others):</strong> সমাজ, দেশ এবং বিশ্বশান্তির জন্য স্বতঃস্ফূর্ত সেবা প্রদান।</li>
+                <li><strong>নিজের প্রতি কর্তব্য (Duty to Self):</strong> শারীরিক, মানসিক ও আধ্যাত্মিক দিক থেকে নিজের সার্বিক উন্নতি সাধন।</li>
+            </ul>
+
+            <!-- 5. Patrol System and Unit Structure -->
+            <h2>৫. উপদল ও ইউনিট ব্যবস্থা (Patrol System & Unit Structure)</h2>
+            <p>স্কাউটিং ছোট ছোট দলের মাধ্যমে কাজ করা শেখায়। প্রতিটি শাখার নির্দিষ্ট ক্ষুদ্রদল এবং ইউনিট কাঠামো নিচে দেওয়া হলো:</p>
+            <div class="table-responsive">
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>শাখা</th>
+                            <th>ক্ষুদ্র দল (Sub-unit)</th>
+                            <th>ক্ষুদ্র দলের প্রধান</th>
+                            <th>পূর্ণাঙ্গ ইউনিট (Unit)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>কাব স্কাউট</td>
+                            <td>ষষ্ঠক </td>
+                            <td>ষষ্ঠক নেতা </td>
+                            <td>প্যাক (Pack) - ২৪ জন</td>
+                        </tr>
+                        <tr>
+                            <td>স্কাউট</td>
+                            <td>উপদল (Patrol)</td>
+                            <td>উপদল নেতা (Patrol Leader)</td>
+                            <td>ট্রুপ (Troop) - ৩২ জন</td>
+                        </tr>
+                        <tr>
+                            <td>রোভার স্কাউট</td>
+                            <td>সাব-ক্রু (Sub-Crew)</td>
+                            <td>রোভার মেট</td>
+                            <td>ক্রু (Crew) - ২৪ জন</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 6. World Scout Emblem & Bangladesh Scouts Badge -->
+            <h2>৬. বিশ্ব স্কাউট ও বাংলাদেশ স্কাউট ব্যাজের তাৎপর্য</h2>
+            <ul>
+                <li><strong>পদ্ম পাপড়ি (Trefoil):</strong> ব্যাজের তিন পাপড়ি স্কাউট প্রতিজ্ঞার ৩টি অংশকে নির্দেশ করে।</li>
+                <li><strong>তারকা (Two Stars):</strong> ব্যাজে থাকা ২টি তারা সত্য ও জ্ঞান এবং স্কাউট আইনের ১০টি অংশ (ঐতিহাসিক) ও প্রতিজ্ঞা নির্দেশ করে।</li>
+                <li><strong>বাঁধন (Bond):</strong> ব্যাজের নিচের অংশটি আবদ্ধ, যা স্কাউট ভাই-বোনের বিশ্বভ্রাতৃত্ব ও ঐক্য প্রকাশ করে।</li>
+                <li><strong>দড়ি ও রীফ নট (Rope with Reef Knot):</strong> বিশ্ব স্কাউট প্রতীকের চারপাশের দড়ি এবং ফাঁসি গিট বিশ্ব স্কাউট আন্দোলনের ঐক্যবদ্ধ সদস্যপদ প্রকাশ করে।</li>
+            </ul>
+
+            <!-- 7. Scout Sign, Salutation & Handshake -->
+            <h2>৭. স্কাউট চিহ্ন, সালাম ও করমর্দন</h2>
+            <ul>
+                <strongস্কাউট চিহ্ন (Scout Sign):</strong>  <h5>পদ্ধতি :</h5> ডান হাতের বুড়ো আঙ্গুল দিয়ে কনিষ্ঠ আঙ্গুলকে চেপে ধরে তালুর ওপর রাখতে হবে, 
+                    মাঝখানের তিনটি আঙ্গুলকে সোজা করে ধরতে হবে। তালু সামনের দিকে রেখে হাত তুলতে হবে। হাতের উপরের বাহু শরীরের সাথে ৪৫° কোণ করে ধরে এবং 
+                    নিচের বাহুকে ঊর্ধ্ববাহুর সাথে <h7>৪৫° কোণ</h7> করে সালাম প্রদর্শন করতে হবে যেন নিম্নবাহু দেহের সাথে সমান্তরাল থাকে। হাতকে এমনভাবে রাখতে হবে যেন 
+                    তালু প্রায় চোখ বরাবর থাকে। এ অবস্থায় হাত রাখাকে স্কাউট চিহ্ন বলে।</br>  
+                    <h5>অনুশীলন :</h5> অপর স্কাউটকে দেখা মাত্রই চিহ্ন দেখানোর মাধ্যমে এবং আয়নার সামনে দাঁড়িয়ে চিহ্ন দেখানোর মাধ্যমে চিহ্ন প্রদর্শনের অনুশীলন করা যায়। </br>  
+                   
+                    <h5>চিহ্নের ব্যবহার :</h5>   প্রতিজ্ঞা পাঠের সময় অথবা প্রতিজ্ঞা পুনঃ পাঠের সময় স্কাউট চিহ্ন দেখাতে হয়।   
+                    সাধারণ পোশাকে একজন স্কাউটের সাথে অপর একজন স্কাউটের পরিচিত হবার জন্য এ চিহ্ন ব্যবহার করা হয়। 
+                    কারণ এই চিহ্ন পৃথিবীর সকল দেশের স্কাউটরা সনাক্ত করতে সক্ষম। ফলে সে যে দেশেরই হোক না কেন এই চিহ্ন দেখালেই বোঝা যাবে যে, 
+                    সামনে অবস্থানকারী একজন স্কাউট।  
+                    
+                    <h5>চিহ্নের তাৎপর্য :</h5> স্কাউট চিহ্নের একটা বিশেষ তাৎপর্য আছে। ডান হাতের কব্জী থেকে হাতের অগ্রভাব পর্যন্ত অংশকে ‘সোনালী বন্ধন’ বা "Golden Tie" বলে।   
+                    হাতের মাঝের তিনটি আঙ্গুল দ্বারা প্রতিজ্ঞার তিনটি অংশ বোঝায়। বুড়ো আঙ্গুল ও কনিষ্ঠ আঙ্গুলের বন্ধনের ফলে সৃষ্ট বৃত্ত সারা পৃথিবীতে স্কাউটদের মধ্যে 
+                    ভ্রাতৃত্ববন্ধনকে বোঝায়।  </li></br>
+                    <h5>স্কাউট সালাম (Scout Salute):</h5> স্কাউট পোশাকে থাকা অবস্থায় স্কাউট চিহ্ন ডান চোখের ভুরুর পাশে স্পর্শ করে সালাম প্রদর্শন করা হয়।</br>
+                   <h5> করমর্দন ( Handshake): </h5>আগে বাংলাদেশের স্কাউটরা বাম হাতে করমর্দন করত। 
+                    পরবর্তীতে দেশের ঐতিহ্যের সাথে সংগতি রেখে ডান হাতে করমর্দন করার প্রথা চালু হয়েছে। 
+                    তাই এই প্রথা অনুযায়ী বাংলাদেশের স্কাউটরা ডান হাতে করমর্দন বা হ্যান্ডশেক করে। এখনও বিশ্বের অনেক দেশে স্কাউটরা 
+                    বাম হাতে হ্যান্ডশেক করে।   
+            </ul>
+
+            <!-- 8. Scout Uniform & Scarf -->
+            <br><h2>৮.স্কার্ফ (Scarf)</h2>
+            <p>শীর্ষ, প্রান্ত, ৩৮" বাহু, বেস বা ভূমি</p>
+            <h5>স্কার্ফের উপকারিতা :</h5>
+            <br>প্রাথমিক প্রতিবিধানে ব্যান্ডেজের কাজে স্কার্ফ ব্যবহার করা যায়।  রংয়ের ভিন্নতা থাকায় একজন স্কাউটের ইউনিট পরিচিতি স্কার্ফের মাধ্যমে
+             নির্ণয় করা যায়।  বিপদে পড়লে সংকেত দেয়ার জন্য নিশান হিসেবে বা কয়েকটি স্কার্ফ বেঁধে দড়ির কাজে ব্যবহার করা যায়।  
+              বিকল্প ব্যবস্থা না থাকলে স্কার্ফ দিয়ে অনেক সময় প্রয়োজনীয় কাজ সম্পন্ন করা যায়।   </br>
+              
+            <h5>ব্যবহার বিধি :</h5> লম্বা দিক থেকে জড়িয়ে স্কার্ফ তৈরি করে ঘাড়ের সাথে মিশিয়ে পরতে হবে। 
+              স্কার্ফ অবশ্যই শার্টের কলারের ওপরে পরতে হবে এবং কলারের বোতাম লাগিয়ে নিতে হবে। কোনক্রমেই কলারের নিচে টাই 
+              আকৃতিতে স্কার্ফ ব্যবহার করা যাবে না।   </br>
+            
+
+            <!-- 9. Scout Own & Good Turn -->
+            <h2>৯.জাতীয় পতাকা</h2>
+            <ul>
+               <li><strong>জাতীয় পতাকা অংকন ও রংয়ের ব্যাখ্যা</strong></li>
+               জাতীয় পতাকা একটি দেশের স্বাধীনতা ও সার্বভৌমত্বের প্রতীক। জাতীয় পতাকাকে সম্মান করা প্রত্যেক নাগরিকের পবিত্র কর্তব্য।  
+            বাংলাদেশের জাতীয় পতাকা আয়তাকার। পতাকার দৈর্ঘ্য ও প্রস্থের অনুপাত ১০:৬। পতাকার মাঝে লাল বৃত্তের ব্যাসার্ধ দৈর্ঘ্যের দশভাগের দুই ভাগ।   
+            
+            <h5>জাতীয় পতাকা আঁকা ও রং করার পদ্ধতি :</h5> পতাকার দৈর্ঘ্যকে সমান দশভাগে ভাগ করতে হবে। প্রত্যেক ভাগকে একটি ইউনিট ধরতে হবে। 
+            পতাকার প্রস্থকে সমান দু’ভাগে ভাগ করতে হবে। পতাকা উত্তোলন প্রান্তের দিক থেকে সাড়ে চার ইউনিট এবং উড়ন্ত প্রান্তের দিকে সাড়ে 
+            পাঁচ ইউনিট রেখে একটি সমান্তরাল রেখা টানতে হবে। 
+
+           <h5>জাতীয় পতাকা রংয়ের ব্যাখ্যা</h5>    
+            গাঢ় সবুজ অংশ : তারুণ্যের উদ্দীপনা এবং গ্রাম বাংলার সবুজ পরিবেশের প্রতীক। </br> 
+             লাল বৃত্ত : রক্তক্ষয়ী স্বাধীনতা সংগ্রামের এবং আশা আকাঙ্ক্ষার নতুন সূর্যের প্রতীক।</br>  
+             
+            <br> সরকারি ও বেসরকারি ভবনের জন্য পতাকার মাপ : </br>
+                ১. দৈর্ঘ্য ৩০৫ সে. মি. প্রস্থ ১৮৩ সে. মি. (১০ ফুট × ৬ ফুট)</br>
+                ২. দৈর্ঘ্য ১৫২ সে. মি. প্রস্থ ৯১ সে. মি. (৫ ফুট × ৩ ফুট)</br>
+                ৩. দৈর্ঘ্য ৭৬ সে. মি. প্রস্থ ৪৬ সে. মি. (২.৫ ফুট × ১.৫ ফুট)</br> 
+            মোটর গাড়ির জন্য :   </br>
+                ১. দৈর্ঘ্য ৩৮ সে. মি., প্রস্থ ২৩ সে. মি. (১৫ ইঞ্চি × ৯ ইঞ্চি)</br>
+                ২. দৈর্ঘ্য ২৫ সে. মি., প্রস্থ ১৫ সে. মি. (১০ ইঞ্চি × ৬ ইঞ্চি)</br>
+            </ul>
+
+            <h2>প্রার্থনা সংগীত</h2>
+            <blockquote style="background: #f4f4f4; padding: 15px; border-left: 5px solid #2e7d32; font-style: italic; margin-bottom: 20px;">
+            <b>বাদশাহ্ তুমি দীন ও দুনিয়ার</b></br>
+
+                বাদশাহ্ তুমি দীন ও দুনিয়ার, </br>
+                হে পরওয়ার দেগার</br>
+                সেজদা লওহে হাজার বার আমার,</br>
+                হে পরওয়ার দেগার।</br>
+
+                <br> চাঁদ, সুরুজ আর গ্রহ তারা, </br>
+                জ্বীন ইনসান আর ফেরেশতারা</br>
+                দিন রজনী গাইছে তারা, মহিমা তোমার, </br>
+                হে পরওয়ার দেগার।</br>
+
+                <br>তোমার নুরের রৌশনী পরশী, </br>
+                উজ্জ্বল হয় যে রবী ও শশী,</br>
+                রঙ্গিন হয়ে উঠে বিকশী, </br>
+                ফুল সে বাগিচার, </br>
+                হে পরওয়ার দেগার।</br>
+
+                বিশ্ব ভুবনে যাহা কিছু আছে, </br>
+                তোমারি কাছে করুনা যাচে</br>
+                তোমারি মাঝে মরে ও বাঁচে জীবন ও সবার, </br>
+                হে পরওয়ার দেগার।   </br>  
+                
+       <br><b>হে খোদা দয়াময়, রহমান রহিম</b></br>          
+                হে খোদা দয়াময়, রহমান রহিম</br>
+                হে বিরাট হে মহান হে অনন্ত অসীম।।</br>
+                নিখিল ধরণীর তুমি অধিপতি,</br>
+                তুমি নিত্য ও সত্য পবিত্র অতি,  </br> 
+                চির অন্ধকারে তুমি ধ্রুব জ্যোতি</br>
+                তুমি সুন্দর মঙ্গল মহামহিম।।</br>
+                তুমি মুক্ত স্বাধীন বাধা বন্ধনহীন</br>
+                তুমি এক তুমি অদ্বিতীয় চিরদিন</br>
+                তুমি সৃজন পালন ধ্বংসকারী</br>
+                তুমি অবায় অক্ষয় অনন্ত আদিম।   আমি গুনাহগার পথ অন্ধকার</br>
+                জ্বালো নুরের আলো নয়নে আমার</br>
+                আমি চাইনা বিচার রোজ হাশরের দিন।</br>
+                চাই করুনা তোমারী ওগো হাকিম।</br>
+                <h6>গোলাম মোস্তফা </h6>
+        </article>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h4>
+                <p>বায়তুশ শরফ কমপ্লেক্স, ডিটি রোড, <br>ধনিয়ালাপাড়া, ডাবলমুরিং, চট্টগ্রাম, 4100।</p>
+                <p>ইমেইল: baitushsharafroverscouts@gmail.com</p>
+                <p>Number: 01836446216</p>
+            </div>
+            <div class="footer-section">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul>
+                   <li><a href="https://www.bsakm.edu.bd/">Baitush sharaf Adarsha Kamil Madrasah</a></li>
+                    <li><a href="https://baitushsharaf.org/">Baitush Sharaf</a></li>
+                    <li><a href="#">বিশ্ব স্কাউট সংস্থা (WOSM)</a></li>
+                    <li><a href="#">জাতীয় স্কাউট কাউন্সিল</a></li>
+                    <li><a href="#">অনলাইন ই-লার্নিং</a></li>
+                    <li><a href="#">অগ্রদূত পত্রিকা</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>সোশ্যাল মিডিয়া & প্রকাশনা</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=61587542846477" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                </div>
+                <p style="margin-top: 10px;"></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Baitush Sharaf Rover Scout Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

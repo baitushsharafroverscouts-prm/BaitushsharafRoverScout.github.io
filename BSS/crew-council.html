@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নির্বাহী কমিটি - বায়তুশ শরফ রোভার স্কাউট গ্রুপ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Playfair+Display:ital,wght@1,600&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="a.style.css">
+
+    <style>
+        :root{
+            --ec-accent:#1b5e20;
+            --ec-accent-deep:#0f3814;
+            --ec-gold:#c9a227;
+            --ec-gold-soft:#e6c85a;
+            --ec-paper:#fbf8ef;
+            --ec-ink:#1c2433;
+        }
+
+        .ec-lang{
+            display:flex;
+            justify-content:center;
+            gap:6px;
+            margin-bottom:22px;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+        }
+        .ec-lang-btn{
+            background:#fff;
+            border:1px solid #d8c98a;
+            cursor:pointer;
+            padding:6px 16px;
+            font-size:13px;
+            color:#6b7280;
+            border-radius:999px;
+            transition:background .2s,color .2s,border-color .2s;
+        }
+        .ec-lang-btn.active{
+            background:var(--ec-accent);
+            border-color:var(--ec-accent);
+            color:#fff;
+            font-weight:bold;
+        }
+
+        .ec-tabs{
+            display:flex;
+            justify-content:center;
+            gap:8px;
+            margin:10px 0 20px;
+            border-bottom:1px solid #e3d9b0;
+            flex-wrap:wrap;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+        }
+        .ec-tab-btn{
+            background:none;
+            border:none;
+            cursor:pointer;
+            padding:12px 20px;
+            font-size:0.95rem;
+            color:#6b7280;
+            border-bottom:3px solid transparent;
+            margin-bottom:-1px;
+            transition:color .2s, border-color .2s;
+        }
+        .ec-tab-btn:hover{color:var(--ec-accent);}
+        .ec-tab-btn.active{
+            color:var(--ec-accent-deep);
+            font-weight:bold;
+            border-bottom-color:var(--ec-gold);
+        }
+
+        .ec-panel{display:none;}
+        .ec-panel.active{display:block;}
+
+        .ec-intro{
+            text-align:center;
+            margin-bottom:20px;
+            padding-bottom:18px;
+            position:relative;
+        }
+        .ec-intro .salam{
+            font-size:0.9rem;
+            color:#6b7280;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            margin:0 0 10px;
+        }
+        .ec-intro .org-name{
+            font-size:1.15rem;
+            color:var(--ec-accent-deep);
+            font-weight:700;
+            font-family:'Noto Serif Bengali','Playfair Display',serif;
+            margin:0 0 6px;
+        }
+        .ec-intro .council-name{
+            font-size:0.95rem;
+            color:var(--ec-gold);
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-style:italic;
+            margin:0;
+        }
+
+        .ec-reveal{
+            opacity:0;
+            transform:translateY(20px);
+            transition:opacity .6s ease, transform .6s ease;
+        }
+        .ec-reveal.is-visible{
+            opacity:1;
+            transform:translateY(0);
+        }
+        @media (prefers-reduced-motion:reduce){
+            .ec-reveal{opacity:1;transform:none;transition:none;}
+        }
+
+        /* ===== "OUR TEAM" style carousel ===== */
+        .team-carousel{
+            max-width:760px;
+            margin:0 auto;
+            text-align:center;
+            padding:10px 0 6px;
+        }
+        .team-title{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-weight:800;
+            font-size:2rem;
+            letter-spacing:2px;
+            color:var(--ec-accent-deep);
+            text-shadow:2px 2px 0 rgba(201,162,39,.18), 4px 4px 10px rgba(15,56,20,.06);
+            margin:0 0 30px;
+        }
+        .carousel-stage{
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:230px;
+        }
+        .car-track{
+            position:relative;
+            width:100%;
+            height:100%;
+        }
+        .car-card{
+            position:absolute;
+            top:50%;
+            left:50%;
+            width:120px;
+            height:150px;
+            border-radius:14px;
+            overflow:hidden;
+            cursor:pointer;
+            box-shadow:0 8px 18px rgba(15,56,20,.18);
+            transition:transform .45s ease, opacity .45s ease, filter .45s ease;
+            transform:translate(-50%,-50%);
+        }
+        .car-avatar{
+            width:100%;
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:26px;
+            font-weight:bold;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            color:#fff;
+            background:linear-gradient(160deg,var(--ec-accent),var(--ec-accent-deep));
+            border:3px solid var(--ec-gold-soft);
+        }
+        .car-avatar-photo{
+            object-fit:cover;
+        }
+        .car-arrow{
+            width:42px;
+            height:42px;
+            border-radius:50%;
+            border:none;
+            background:#eaf3ec;
+            color:var(--ec-accent-deep);
+            font-size:16px;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:20;
+            flex-shrink:0;
+            transition:background .2s;
+        }
+        .car-arrow:hover{background:#d7ead9;}
+        .carousel-stage{gap:14px;}
+
+        .car-caption{margin-top:8px;}
+        .car-name{
+            font-family:'Playfair Display','Noto Serif Bengali',serif;
+            font-style:italic;
+            font-size:1.4rem;
+            color:var(--ec-gold);
+            margin:0 0 4px;
+        }
+        .car-role{
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.78rem;
+            letter-spacing:1.5px;
+            text-transform:uppercase;
+            color:var(--ec-accent-deep);
+            margin:0 0 10px;
+        }
+        .car-meta{
+            display:flex;
+            justify-content:center;
+            gap:18px;
+            flex-wrap:wrap;
+            font-family:'Hind Siliguri',Arial,sans-serif;
+            font-size:0.8rem;
+            color:#6b7280;
+            border-top:1px dashed #d8c98a;
+            padding-top:8px;
+            margin:0 auto;
+            max-width:360px;
+        }
+        .car-meta b{color:var(--ec-ink);font-weight:600;}
+
+        .car-dots{
+            margin-top:16px;
+            display:flex;
+            justify-content:center;
+            gap:6px;
+            flex-wrap:wrap;
+        }
+        .car-dots .dot{
+            width:7px;
+            height:7px;
+            border-radius:50%;
+            background:#d8d4c4;
+            cursor:pointer;
+            transition:background .2s, transform .2s;
+        }
+        .car-dots .dot.active{
+            background:var(--ec-accent);
+            transform:scale(1.3);
+        }
+
+        @media (max-width:560px){
+            .team-title{font-size:1.5rem;}
+            .carousel-stage{height:190px;}
+            .car-card{width:96px;height:120px;}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-title">
+            <img src="logo.jpg.jpg" alt="Logo" class="logo">
+            <h1 data-bn="বায়তুশ শরফ রোভার স্কাউট গ্রুপ" data-en="Baitush Sharaf Rover Scout Group">বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h1>
+        </div>
+        <header class="hero-header">
+            <div class="settings-container">
+                <button class="three-dots-btn" id="menuToggle"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-settings" id="settingsDropdown">
+                    <div class="setting-item">
+                        <span data-bn="ডার্ক মোড" data-en="Dark Mode">ডার্ক মোড</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span data-bn="ভাষা" data-en="Language">ভাষা</span>
+                        <button id="langToggleBtn" class="lang-btn">English</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <ul class="nav-links">
+            <li><a href="index.html" data-bn="হোম" data-en="Home">হোম</a></li>
+            <li class="dropdown">
+                <a href="#" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="a.html" data-bn="সাধারণ তথ্য" data-en="General Information">সাধারণ তথ্য</a></li>
+                    <li><a href="history.html" data-bn="ইতিহাস ও পটভূমি" data-en="History & Background">ইতিহাস ও পটভূমি</a></li>
+                    <li><a href="Or.html" data-bn="সাংগঠনিক তথ্য" data-en="Organizational Info">সাংগঠনিক তথ্য</a></li>
+                    <li><a href="crew-council.html" data-bn="নির্বাহী কমিটি" data-en="Executive Committee">নির্বাহী কমিটি</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" data-bn="সংবাদ ও মিডিয়া" data-en="News & Media">সংবাদ ও মিডিয়া <i class="fas fa-caret-down"></i></a></li>
+            <li class="dropdown"><a href="#" data-bn="প্রকল্প" data-en="Projects">প্রকল্প <i class="fas fa-caret-down"></i></a></li>
+            <li class="dropdown">
+                <a href="#" data-bn="আবেদন" data-en="Apply">আবেদন <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="scout-admission-form.html" data-bn="বাইতুশ শরফ রোভার স্কাউট গ্রুপ আবেদন" data-en="Apply BSRSG">গ্রুপ আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/registration" target="_blank" data-bn="বিএসআইডি আবেদন" data-en="Apply BSID">বিএসআইডি আবেদন</a></li>
+                    <li><a href="https://service.scouts.gov.bd/user-verify" target="_blank" data-bn="স্কাউট আইডি যাচাই" data-en="Verification of Scout ID">স্কাউট আইডি যাচাই</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 data-bn="নির্বাহী কমিটি" data-en="Executive Committee">নির্বাহী কমিটি</h1>
+            <p data-bn="আমাদের গ্রুপের নেতৃত্বে যারা রয়েছেন" data-en="The people who lead our group">আমাদের গ্রুপের নেতৃত্বে যারা রয়েছেন</p>
+            <h3>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h3>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <article class="content-card">
+
+            <div class="ec-lang">
+                <button class="ec-lang-btn active" data-lang="bn">বাংলা</button>
+                <button class="ec-lang-btn" data-lang="en">English</button>
+            </div>
+
+            <div class="ec-tabs">
+                <button class="ec-tab-btn active" data-panel="crew-council" data-en="Crew Council">ক্রু কাউন্সিল</button>
+                <button class="ec-tab-btn" data-panel="crew-council-rover" data-en="Crew Council - Rover">ক্রু কাউন্সিল - Rover</button>
+            </div>
+
+            <!-- ===== Panel 1: ক্রু কাউন্সিল ===== -->
+            <div class="ec-panel active" id="crew-council">
+                <div class="team-carousel ec-reveal" id="carousel-crew">
+                    <h2 class="team-title" data-bn="আমাদের টিম" data-en="OUR TEAM">আমাদের টিম</h2>
+                    <div class="carousel-stage">
+                        <button class="car-arrow car-prev" aria-label="Previous">&#10094;</button>
+                        <div class="car-track"></div>
+                        <button class="car-arrow car-next" aria-label="Next">&#10095;</button>
+                    </div>
+                    <div class="car-caption">
+                        <h3 class="car-name">Member Name</h3>
+                        <p class="car-role">President</p>
+                        <div class="car-meta">
+                            <span><b>BSID:</b> <span class="car-bsid">—</span></span>
+                            <span><b data-bn="যোগদানের তারিখ:" data-en="Joining Date:">Joining Date:</b> <span class="car-join">—</span></span>
+                        </div>
+                    </div>
+                    <div class="car-dots"></div>
+                </div>
+            </div>
+
+            <!-- ===== Panel 2: ক্রু কাউন্সিল - Rover ===== -->
+            <div class="ec-panel" id="crew-council-rover">
+                <div class="ec-intro ec-reveal" id="rover-intro">
+                    <p class="salam" data-en="Assalamu Alaikum Wa Rahmatullahi Wa Barakatuh">আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহি ওয়াবারকাতুহু</p>
+                    <p class="org-name" data-en="Baitush Sharaf Adarsha Kamil Madrasah Rover Scout Group">বায়তুশ শরফ আদর্শ কামিল মাদ্রাসা রোভার স্কাউট গ্রুপ</p>
+                    <p class="council-name" data-en="Crew Council">ক্রু কাউন্সিল</p>
+                </div>
+
+                <div class="team-carousel ec-reveal" id="carousel-rover">
+                    <h2 class="team-title" data-bn="আমাদের টিম" data-en="OUR TEAM">আমাদের টিম</h2>
+                    <div class="carousel-stage">
+                        <button class="car-arrow car-prev" aria-label="Previous">&#10094;</button>
+                        <div class="car-track"></div>
+                        <button class="car-arrow car-next" aria-label="Next">&#10095;</button>
+                    </div>
+                    <div class="car-caption">
+                        <h3 class="car-name">নূর মোহাম্মদ নাঈম</h3>
+                        <p class="car-role">সভাপতি</p>
+                        <div class="car-meta">
+                            <span><b>BSID:</b> <span class="car-bsid">—</span></span>
+                            <span><b data-bn="যোগদানের তারিখ:" data-en="Joining Date:">Joining Date:</b> <span class="car-join">—</span></span>
+                        </div>
+                    </div>
+                    <div class="car-dots"></div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>বায়তুশ শরফ রোভার স্কাউট গ্রুপ</h4>
+                <p>বায়তুশ শরফ কমপ্লেক্স, ডিটি রোড, <br>ধনিয়ালাপাড়া, ডাবলমুরিং, চট্টগ্রাম, 4100।</p>
+                <p>ইমেইল: baitushsharafroverscouts@gmail.com</p>
+                <p>মোবাইল: 01836446216</p>
+            </div>
+            <div class="footer-section">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul>
+                    <li><a href="https://www.bsakm.edu.bd/" target="_blank">Baitush Sharaf Adarsha Kamil Madrasah</a></li>
+                    <li><a href="https://baitushsharaf.org/" target="_blank">Baitush Sharaf</a></li>
+                    <li><a href="https://www.scouts.gov.bd/" target="_blank">বাংলাদেশ স্কাউটস</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>সোশ্যাল মিডিয়া</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=61587542846477" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Baitush Sharaf Rover Scout Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="site-data.js"></script>
+    <script>
+        // ===== Load Executive Committee data saved from the admin panel =====
+        var siteContent = (typeof loadSiteContent === 'function') ? loadSiteContent() : null;
+        var ec = (siteContent && siteContent.executiveCommittee) ? siteContent.executiveCommittee : { crewCouncil: [], rover: { members: [] } };
+
+        function buildCarCard(m){
+            var div = document.createElement('div');
+            div.className = 'car-card';
+            div.dataset.name = m.name || '';
+            div.dataset.roleBn = m.roleBn || '';
+            div.dataset.roleEn = m.roleEn || '';
+            div.dataset.bsid = m.bsid || '—';
+            div.dataset.join = m.joinDate || '—';
+            if (m.photo) {
+                var img = document.createElement('img');
+                img.className = 'car-avatar car-avatar-photo';
+                img.src = m.photo;
+                img.alt = m.name || '';
+                img.onerror = function(){ this.onerror = null; this.replaceWith(buildAvatarFallback(m.avatar)); };
+                div.appendChild(img);
+            } else {
+                div.appendChild(buildAvatarFallback(m.avatar));
+            }
+            return div;
+        }
+        function buildAvatarFallback(initials){
+            var avatar = document.createElement('div');
+            avatar.className = 'car-avatar';
+            avatar.textContent = initials || '';
+            return avatar;
+        }
+        function populateCarousel(rootId, members){
+            var root = document.getElementById(rootId);
+            if (!root) return;
+            var track = root.querySelector('.car-track');
+            track.innerHTML = '';
+            (members || []).forEach(function(m){ track.appendChild(buildCarCard(m)); });
+        }
+        populateCarousel('carousel-crew', ec.crewCouncil);
+        populateCarousel('carousel-rover', ec.rover && ec.rover.members);
+
+        // ===== Rover tab intro text (salam / org name / council name) =====
+        if (ec.rover) {
+            var introRoot = document.getElementById('rover-intro');
+            if (introRoot) {
+                var salamEl = introRoot.querySelector('.salam');
+                var orgEl = introRoot.querySelector('.org-name');
+                var councilEl = introRoot.querySelector('.council-name');
+                if (salamEl && ec.rover.salamBn) { salamEl.textContent = ec.rover.salamBn; salamEl.dataset.en = ec.rover.salamEn || ec.rover.salamBn; }
+                if (orgEl && ec.rover.orgNameBn) { orgEl.textContent = ec.rover.orgNameBn; orgEl.dataset.en = ec.rover.orgNameEn || ec.rover.orgNameBn; }
+                if (councilEl && ec.rover.councilNameBn) { councilEl.textContent = ec.rover.councilNameBn; councilEl.dataset.en = ec.rover.councilNameEn || ec.rover.councilNameBn; }
+            }
+        }
+
+        document.querySelectorAll('.ec-tab-btn').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                document.querySelectorAll('.ec-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+                document.querySelectorAll('.ec-panel').forEach(function(p){ p.classList.remove('active'); });
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.panel).classList.add('active');
+            });
+        });
+
+        var ecLang = 'bn';
+        var ecTranslatable = document.querySelectorAll('.ec-panel [data-bn], .ec-panel [data-en], .ec-tab-btn[data-en]');
+        ecTranslatable.forEach(function(el){ el.dataset.orig = el.textContent; });
+
+        function setEcLang(lang){
+            ecLang = lang;
+            ecTranslatable.forEach(function(el){
+                el.textContent = (lang === 'bn') ? (el.dataset.bn || el.dataset.orig) : (el.dataset.en || el.dataset.orig);
+            });
+            document.querySelectorAll('.ec-lang-btn').forEach(function(b){
+                b.classList.toggle('active', b.dataset.lang === lang);
+            });
+            document.querySelectorAll('.team-carousel').forEach(refreshCaption);
+        }
+        document.querySelectorAll('.ec-lang-btn').forEach(function(btn){
+            btn.addEventListener('click', function(){ setEcLang(btn.dataset.lang); });
+        });
+
+        function refreshCaption(root){
+            var active = root.querySelector('.car-card.is-active') || root.querySelector('.car-card');
+            if(!active) return;
+            root.querySelector('.car-name').textContent = active.dataset.name;
+            root.querySelector('.car-role').textContent = ecLang === 'bn' ? active.dataset.roleBn : active.dataset.roleEn;
+            root.querySelector('.car-bsid').textContent = active.dataset.bsid || '—';
+            root.querySelector('.car-join').textContent = active.dataset.join || '—';
+        }
+
+        function initCarousel(root){
+            var cards = Array.from(root.querySelectorAll('.car-card'));
+            var dotsWrap = root.querySelector('.car-dots');
+            var current = 0;
+
+            cards.forEach(function(c,i){
+                var dot = document.createElement('span');
+                dot.className = 'dot' + (i===0 ? ' active' : '');
+                dot.addEventListener('click', function(){ goTo(i); });
+                dotsWrap.appendChild(dot);
+            });
+
+            function render(){
+                cards.forEach(function(card,i){
+                    var offset = i - current;
+                    var abs = Math.abs(offset);
+                    card.classList.toggle('is-active', offset === 0);
+                    card.style.transform = 'translate(-50%,-50%) translateX(' + (offset*118) + 'px) scale(' + (abs===0 ? 1.15 : 0.72) + ')';
+                    card.style.zIndex = 10 - abs;
+                    card.style.opacity = abs > 2 ? 0 : 1;
+                    card.style.filter = abs === 0 ? 'grayscale(0)' : 'grayscale(.85) brightness(.88)';
+                    card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+                });
+                dotsWrap.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('active', i===current); });
+                refreshCaption(root);
+            }
+            function goTo(i){ if(!cards.length) return; current = (i + cards.length) % cards.length; render(); }
+
+            root.querySelector('.car-prev').addEventListener('click', function(){ goTo(current-1); });
+            root.querySelector('.car-next').addEventListener('click', function(){ goTo(current+1); });
+            cards.forEach(function(c,i){ c.addEventListener('click', function(){ goTo(i); }); });
+            if (cards.length) render();
+        }
+        document.querySelectorAll('.team-carousel').forEach(initCarousel);
+        setEcLang('bn');
+
+        var revealEls = document.querySelectorAll('.ec-reveal');
+        var revealObserver = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+        revealEls.forEach(function(el){ revealObserver.observe(el); });
+    </script>
+</body>
+</html>
